@@ -284,6 +284,17 @@
       min-width: 0;
     }
 
+    .skill-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 14px; }
+    .skill-group { background: rgba(0,0,0,.18); border: 1px solid rgba(255,255,255,.06); border-radius: 14px; padding: 14px; }
+    .skill-group-title { color: var(--cyan); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 12px; }
+    .skill { margin-top: 12px; }
+    .skill:first-of-type { margin-top: 0; }
+    .skill-head { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; font-size: 13px; }
+    .skill-name { color: var(--text); overflow-wrap: anywhere; }
+    .skill-rank { color: var(--dim); font-size: 11px; white-space: nowrap; }
+    .meter { height: 8px; margin-top: 7px; border-radius: 999px; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.055); overflow: hidden; }
+    .meter-fill { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--green), var(--cyan), var(--violet)); box-shadow: 0 0 18px rgba(117,248,255,.24); }
+
     footer { color: var(--dim); padding: 8px 0 46px; font-size: 13px; }
     .footline { border-top: 1px solid var(--line2); padding-top: 16px; display: flex; flex-wrap: wrap; gap: 10px 18px; }
 
@@ -347,6 +358,7 @@
       .actions { grid-template-columns: 1fr; gap: 8px; margin-top: 16px; }
       .btn { width: 100%; min-height: 44px; justify-content: flex-start; padding-left: 14px; }
       .grid, .cards2 { gap: 12px; margin-bottom: 12px; }
+      .skill-grid { grid-template-columns: 1fr; gap: 12px; }
       .list { gap: 8px; }
       .list li { font-size: 13px; }
       .muted { font-size: 13px; }
@@ -478,19 +490,27 @@ $ gpg --import pavel-klyuev.asc</pre></div>
         </article>
 
         <article class="card" id="stack">
-          <p class="kicker">stack</p>
-          <h3>Working area</h3>
-          <p class="muted">Common topics from my GitHub profile and daily work.</p>
-          <div class="snippet"><pre>$ skills --grep infra
-kubernetes
-postgresql
-jenkins
-ansible
-terraform
-python
-linux
-observability
-self-hosted mail</pre></div>
+          <p class="kicker">top skills</p>
+          <h3>Infrastructure signal</h3>
+          <p class="muted">Grouped from recent IaC/platform work, long-running SRE topics and recurring operational work.</p>
+          <div class="skill-grid">
+            <div class="skill-group">
+              <p class="skill-group-title">core platform</p>
+              <div class="skill"><div class="skill-head"><span class="skill-name">GCP Infrastructure Engineering</span><span class="skill-rank">96</span></div><div class="meter"><span class="meter-fill" style="width:96%"></span></div></div>
+              <div class="skill"><div class="skill-head"><span class="skill-name">Terraform / IaC Design</span><span class="skill-rank">94</span></div><div class="meter"><span class="meter-fill" style="width:94%"></span></div></div>
+              <div class="skill"><div class="skill-head"><span class="skill-name">Kubernetes / GKE Platform</span><span class="skill-rank">93</span></div><div class="meter"><span class="meter-fill" style="width:93%"></span></div></div>
+              <div class="skill"><div class="skill-head"><span class="skill-name">GitOps / Helm / ArgoCD</span><span class="skill-rank">90</span></div><div class="meter"><span class="meter-fill" style="width:90%"></span></div></div>
+              <div class="skill"><div class="skill-head"><span class="skill-name">IAM / CI/CD Integrations</span><span class="skill-rank">88</span></div><div class="meter"><span class="meter-fill" style="width:88%"></span></div></div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-group-title">operations depth</p>
+              <div class="skill"><div class="skill-head"><span class="skill-name">PostgreSQL Operations</span><span class="skill-rank">87</span></div><div class="meter"><span class="meter-fill" style="width:87%"></span></div></div>
+              <div class="skill"><div class="skill-head"><span class="skill-name">Linux / Networking / DNS</span><span class="skill-rank">86</span></div><div class="meter"><span class="meter-fill" style="width:86%"></span></div></div>
+              <div class="skill"><div class="skill-head"><span class="skill-name">Monitoring / Observability</span><span class="skill-rank">84</span></div><div class="meter"><span class="meter-fill" style="width:84%"></span></div></div>
+              <div class="skill"><div class="skill-head"><span class="skill-name">Data Platforms / ETL</span><span class="skill-rank">82</span></div><div class="meter"><span class="meter-fill" style="width:82%"></span></div></div>
+              <div class="skill"><div class="skill-head"><span class="skill-name">Mail / Self-hosted Services</span><span class="skill-rank">78</span></div><div class="meter"><span class="meter-fill" style="width:78%"></span></div></div>
+            </div>
+          </div>
         </article>
       </section>
 

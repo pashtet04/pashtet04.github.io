@@ -125,7 +125,6 @@
     .contact-label { display: none; }
 
     code { background: rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.06); color: #dce8ff; padding: 2px 6px; border-radius: 7px; font-family: var(--mono); overflow-wrap: anywhere; word-break: break-word; }
-    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 0 0 20px; }
     .cards2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin: 0 0 20px; }
     .muted { color: var(--muted); font-size: 14px; }
     .linkline { display: inline-block; margin-top: 12px; color: var(--green); overflow-wrap: anywhere; word-break: break-word; }
@@ -151,7 +150,7 @@
     .cyan { color: var(--cyan); }
 
     @media (max-width: 980px) {
-      .hero, .grid, .cards2 { grid-template-columns: 1fr; }
+      .hero, .cards2 { grid-template-columns: 1fr; }
       .side { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
@@ -173,7 +172,7 @@
       .badge { font-size: 11px; padding: 6px 8px; }
       .actions { grid-template-columns: 1fr; gap: 8px; }
       .btn { width: 100%; justify-content: flex-start; padding-left: 14px; }
-      .grid, .cards2, .skill-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 12px; }
+      .cards2, .skill-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 12px; }
       .list li, .muted { font-size: 13px; }
       .contact-list { gap: 12px; }
       .contact-list li { grid-template-columns: 28px minmax(0, 1fr); column-gap: 18px; }
@@ -191,7 +190,6 @@
     <header class="nav">
       <a class="brand" href="/" aria-label="klyuev.icu home"><span class="led"></span><span>pavel@klyuev:~</span></a>
       <nav class="nav-links" aria-label="primary navigation">
-        <a href="#services">services</a>
         <a href="#identity">identity</a>
         <a href="#contacts">contacts</a>
         <a href="#stack">stack</a>
@@ -232,12 +230,6 @@
             <ul class="list"><li><a href="https://t.me/kubertat" target="_blank" rel="noopener">t.me/kubertat</a></li><li>systems, DevOps, SRE, cloud, software engineering</li></ul>
           </section>
         </aside>
-      </section>
-
-      <section id="services" class="grid">
-        <article class="card"><p class="kicker">service 01</p><h3>Email</h3><p class="muted">Primary mailbox for direct communication and technical discussions.</p><a class="linkline" href="mailto:pavel@klyuev.icu">pavel@klyuev.icu</a></article>
-        <article class="card"><p class="kicker">service 02</p><h3>Webmail</h3><p class="muted">Browser access to mailbox through my own mail stack.</p><a class="linkline" href="https://webmail.klyuev.icu" target="_blank" rel="noopener">webmail.klyuev.icu</a></article>
-        <article class="card"><p class="kicker">service 03</p><h3>Delta Chat</h3><p class="muted">Chatmail relay for mail-based messaging and Delta Chat onboarding.</p><a class="linkline" href="https://chat.klyuev.icu" target="_blank" rel="noopener">chat.klyuev.icu</a></article>
       </section>
 
       <section id="identity" class="cards2">

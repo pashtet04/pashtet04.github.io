@@ -236,11 +236,11 @@
         <article class="card">
           <p class="kicker">crypto</p>
           <h3>OpenPGP public key</h3>
-          <p class="muted">Public key endpoint is reserved. After exporting the armored public key, it should be committed as <code>pgp.asc</code>. Private keys never belong in this repository.</p>
+          <p class="muted">OpenPGP public key is available as <code>pgp.asc</code>. Verify the downloaded key against this primary fingerprint. Private keys never belong in this repository.</p>
           <div class="snippet"><pre>$ curl -fsSL https://klyuev.icu/pgp.asc -o pavel-klyuev.asc
-$ gpg --import pavel-klyuev.asc</pre></div>
+$ gpg --show-keys --with-fingerprint pavel-klyuev.asc</pre></div>
           <a class="linkline" href="/pgp.asc">/pgp.asc</a>
-          <div class="fingerprint" aria-hidden="true"><span class="fp-part">PGP</span><span class="fp-part">KEY</span><span class="fp-part">COMING</span><span class="fp-part">SOON</span><span class="fp-part">----</span></div>
+          <div class="fingerprint" aria-label="OpenPGP primary fingerprint 070F 0A22 70DA C318 3FD3 6C96 B005 0F78 1C6C 95E7"><span class="fp-part">070F</span><span class="fp-part">0A22</span><span class="fp-part">70DA</span><span class="fp-part">C318</span><span class="fp-part">3FD3</span><span class="fp-part">6C96</span><span class="fp-part">B005</span><span class="fp-part">0F78</span><span class="fp-part">1C6C</span><span class="fp-part">95E7</span></div>
         </article>
 
         <article class="card" id="stack">

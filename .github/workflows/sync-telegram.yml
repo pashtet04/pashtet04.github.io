@@ -19,21 +19,25 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    env:
+      TG_API_ID: ${{ secrets.TG_API_ID }}
+      TG_API_HASH: ${{ secrets.TG_API_HASH }}
+      TG_SESSION: ${{ secrets.TG_SESSION }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install --disable-pip-version-check requests beautifulsoup4
+      - run: pip install --disable-pip-version-check telethon
       - run: python scripts/update_telegram.py
       - name: Commit feed update
         run: |
-          if [ -z "$(git status --porcelain -- telegram-latest.json)" ]; then
+          if [ -z "$(git status --porcelain)" ]; then
             echo "Telegram feed is unchanged"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add telegram-latest.json
+          git add -A
           git commit -m "Update latest Telegram post"
           git push

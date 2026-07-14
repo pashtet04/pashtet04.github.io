@@ -48,13 +48,12 @@ def reaction_count(root) -> int | None:
     if not container:
         return None
     values: list[int] = []
-    selectors = [
+    for selector in (
         ".tgme_reaction_count",
         ".tgme_widget_message_reaction_count",
         "[class*='reaction'][class*='count']",
         "[class*='reaction'] [class*='count']",
-    ]
-    for selector in selectors:
+    ):
         for node in container.select(selector):
             value = parse_count(text_from(node))
             if value is not None:
@@ -75,18 +74,21 @@ def photo_url(root) -> str | None:
     return urljoin(CHANNEL_URL, match.group(1)) if match else None
 
 
-def main() -> None:
+def fetch_latest() -> dict:
     response = requests.get(
         CHANNEL_URL,
         timeout=30,
-        headers={"User-Agent": "Mozilla/5.0 (compatible; klyuev.icu Telegram sync/1.0)"},
+        headers={
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126 Safari/537.36",
+            "Accept-Language": "en-US,en;q=0.9",
+        },
     )
     response.raise_for_status()
 
     soup = BeautifulSoup(response.text, "html.parser")
     messages = soup.select(".tgme_widget_message_wrap")
     if not messages:
-        raise RuntimeError("Telegram preview page contains no public messages")
+        raise RuntimeError(f"Telegram preview page contains no public messages; html_size={len(response.text)}")
 
     wrapper = messages[-1]
     root = wrapper.select_one(".tgme_widget_message") or wrapper
@@ -94,15 +96,14 @@ def main() -> None:
     if not post_id:
         raise RuntimeError("Latest Telegram message has no data-post attribute")
 
-    message_node = root.select_one(".tgme_widget_message_text")
-    text = text_from(message_node)
+    text = text_from(root.select_one(".tgme_widget_message_text"))
     if not text:
         text = text_from(root.select_one(".tgme_widget_message_caption"))
 
     time_node = root.select_one("time")
     published_at = time_node.get("datetime") if time_node else None
 
-    payload = {
+    return {
         "channel": CHANNEL,
         "post": post_id,
         "url": f"https://t.me/{post_id}",
@@ -121,9 +122,29 @@ def main() -> None:
             ],
         ),
         "image": photo_url(root),
-        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "error": None,
     }
 
+
+def main() -> None:
+    try:
+        payload = fetch_latest()
+    except Exception as exc:  # Keep the site usable even when Telegram blocks preview scraping.
+        payload = {
+            "channel": CHANNEL,
+            "post": None,
+            "url": f"https://t.me/{CHANNEL}",
+            "text": "Open the Telegram channel to read the latest post.",
+            "published_at": None,
+            "views": None,
+            "comments": None,
+            "reactions": None,
+            "forwards": None,
+            "image": None,
+            "error": f"{type(exc).__name__}: {exc}",
+        }
+
+    payload["updated_at"] = datetime.now(timezone.utc).isoformat()
     OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 

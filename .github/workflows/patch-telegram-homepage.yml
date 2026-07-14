@@ -1,0 +1,73 @@
+name: Patch homepage Telegram card
+
+on:
+  push:
+    paths:
+      - ".github/workflows/patch-telegram-homepage.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Remove About and add latest Telegram card
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path("index.html")
+          html = path.read_text(encoding="utf-8")
+
+          html = html.replace('<a href="#about">About</a>', '')
+          html = re.sub(
+              r'\s*<section class="section" id="about">.*?</section>',
+              '',
+              html,
+              count=1,
+              flags=re.S,
+          )
+          html = html.replace('02 / services', '01 / services')
+          html = html.replace('03 / selected work', '02 / selected work')
+          html = html.replace('04 / stack', '03 / stack')
+
+          telegram_panel = '''<section class="section notes-contact" id="contact"><article class="panel telegram-card" id="telegram-latest"><p class="eyebrow">Latest from Telegram</p><div class="telegram-head"><div><h2>Кубертатный период</h2><a href="https://t.me/kubertat" target="_blank" rel="noopener">@kubertat</a></div><span class="telegram-state" id="telegram-state">syncing</span></div><a class="telegram-post" id="telegram-post" href="https://t.me/kubertat" target="_blank" rel="noopener"><img class="telegram-image" id="telegram-image" alt="" hidden><time id="telegram-date">Latest channel post</time><p id="telegram-text">Open the Telegram channel to read the latest post.</p><div class="telegram-stats" id="telegram-stats"></div><span class="telegram-open">Open in Telegram →</span></a></article><article class="panel contact">'''
+          html, count = re.subn(
+              r'<section class="section notes-contact" id="contact"><article class="panel journal">.*?</article><article class="panel contact">',
+              telegram_panel,
+              html,
+              count=1,
+              flags=re.S,
+          )
+          if count != 1:
+              raise RuntimeError("Could not replace Notes panel")
+
+          css = '''
+          .notes-contact{grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);align-items:stretch}
+          .telegram-card{padding:20px;min-width:0}.telegram-card .eyebrow{margin-bottom:20px}.telegram-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.telegram-head h2{margin:0;color:var(--strong);font-size:clamp(30px,4vw,46px);line-height:.96;letter-spacing:-.045em}.telegram-head a{display:inline-block;margin-top:9px;font:750 12px/1 var(--mono)}.telegram-state{flex:0 0 auto;border:1px solid var(--border-soft);background:var(--surface);padding:6px 8px;color:var(--muted);font:700 9px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em}.telegram-post{display:block;margin-top:18px;border-top:1px solid var(--border-soft);padding-top:17px;color:var(--fg)}.telegram-post:hover{text-decoration:none}.telegram-image{display:block;width:100%;max-height:260px;object-fit:cover;margin:0 0 15px;border:1px solid var(--border-soft)}.telegram-post time{color:var(--accent);font:750 10px/1.4 var(--mono);text-transform:uppercase;letter-spacing:.1em}.telegram-post p{margin:11px 0 0;color:var(--fg);font-size:16px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}.telegram-stats{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}.telegram-stat{border:1px solid var(--border-soft);background:var(--surface);padding:6px 8px;color:var(--muted);font:700 10px/1 var(--mono)}.telegram-open{display:block;margin-top:17px;color:var(--blue);font:750 11px/1 var(--mono)}
+          @media(max-width:980px){.notes-contact{grid-template-columns:1fr}}
+          @media(max-width:680px){.telegram-card{padding:16px}.telegram-head{display:block}.telegram-state{display:inline-block;margin-top:12px}}
+          '''
+          html = html.replace('</style>', css + '</style>', 1)
+
+          script = '''
+          <script>
+          (()=>{const root=document.getElementById('telegram-latest');if(!root)return;const compact=new Intl.NumberFormat('en',{notation:'compact',maximumFractionDigits:1});const stat=(label,value)=>value==null?'':`<span class="telegram-stat">${label} ${compact.format(value)}</span>`;fetch('telegram-latest.json',{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error(`HTTP ${response.status}`);return response.json()}).then(post=>{const link=document.getElementById('telegram-post');link.href=post.url||'https://t.me/kubertat';document.getElementById('telegram-text').textContent=post.text||'Media post — open in Telegram to view it.';const date=post.published_at?new Date(post.published_at):null;document.getElementById('telegram-date').textContent=date&&!Number.isNaN(date.valueOf())?date.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}):'Latest channel post';document.getElementById('telegram-stats').innerHTML=[stat('reactions',post.reactions),stat('comments',post.comments),stat('views',post.views),stat('forwards',post.forwards)].join('');const image=document.getElementById('telegram-image');if(post.image){image.src=post.image;image.hidden=false}else{image.hidden=true}document.getElementById('telegram-state').textContent='auto-updated'}).catch(()=>{document.getElementById('telegram-state').textContent='open channel'})})();
+          </script>
+          '''
+          html = html.replace('</body>', script + '</body>', 1)
+          path.write_text(html, encoding="utf-8")
+          PY
+      - name: Commit homepage update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Replace About with latest Telegram post"
+          git push

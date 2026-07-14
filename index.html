@@ -3,356 +3,176 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Pavel Klyuev — Site Reliability Engineer designing and operating predictable production infrastructure.">
+  <meta name="description" content="Pavel Klyuev — Principal SRE and Platform Engineer with 10+ years of experience in Kubernetes, cloud infrastructure, CI/CD, observability and stateful systems.">
   <meta property="og:type" content="profile">
-  <meta property="og:title" content="Pavel Klyuev — Site Reliability Engineer">
-  <meta property="og:description" content="Infrastructure, Kubernetes, reliability, observability and production engineering.">
+  <meta property="og:title" content="Pavel Klyuev — Principal SRE / Platform Engineer">
+  <meta property="og:description" content="Kubernetes platforms, infrastructure automation, observability, CI/CD and production systems.">
   <meta property="og:url" content="https://klyuev.icu/">
   <meta name="theme-color" content="#f7f8fa">
-  <title>Pavel Klyuev · Production Infrastructure</title>
+  <title>Pavel Klyuev · Principal SRE / Platform Engineer</title>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Pavel Klyuev","jobTitle":"Site Reliability Engineer","url":"https://klyuev.icu/","sameAs":["https://github.com/pashtet04","https://t.me/pklyuev","https://www.linkedin.com/in/pklyuev/","https://twitter.com/pklyuev"]}}
+  {"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Pavel Klyuev","jobTitle":"Principal SRE / Platform Engineer","url":"https://klyuev.icu/","sameAs":["https://github.com/pashtet04","https://t.me/pklyuev","https://www.linkedin.com/in/pklyuev/","https://twitter.com/pklyuev"]}}
   </script>
   <style>
     :root {
       color-scheme: light;
       --bg: #f7f8fa;
-      --bg-soft: #f6f8fb;
       --surface: #eef2f6;
       --surface-2: #e6edf3;
-      --surface-3: #dbe4ef;
       --paper: #fffefb;
       --border: #cbd5e1;
       --border-soft: #d6dee8;
       --fg: #1f2933;
-      --fg-strong: #111827;
+      --strong: #111827;
       --muted: #64748b;
       --subtle: #94a3b8;
       --accent: #0e7490;
       --accent-soft: #dceef2;
-      --accent-ui: #4f8f9f;
       --blue: #2563eb;
       --green: #2f855a;
-      --yellow: #b7791f;
-      --orange: #b0783f;
-      --red: #c53030;
-      --purple: #7c3aed;
-      --selection: #dbe4ef;
-      --warning-bg: #fff4cc;
-      --success-bg: #2f855a26;
-      --danger-bg: #c5303026;
-      --shadow: 0 8px 24px rgba(15, 23, 42, .08);
-      --shadow-hard: 0 1px 0 rgba(17, 24, 39, .05), 0 20px 60px rgba(15, 23, 42, .06);
+      --shadow: 0 10px 30px rgba(15, 23, 42, .07);
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --display: ui-sans-serif, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      min-height: 100vh;
       color: var(--fg);
       font-family: var(--sans);
       line-height: 1.55;
       background:
-        linear-gradient(90deg, rgba(203, 213, 225, .36) 1px, transparent 1px),
-        linear-gradient(rgba(203, 213, 225, .30) 1px, transparent 1px),
-        radial-gradient(circle at 15% 0%, rgba(14, 116, 144, .10), transparent 34rem),
-        radial-gradient(circle at 92% 12%, rgba(37, 99, 235, .06), transparent 28rem),
-        linear-gradient(180deg, var(--bg), var(--bg-soft));
-      background-size: 56px 56px, 56px 56px, auto, auto, auto;
-      -webkit-text-size-adjust: 100%;
+        linear-gradient(90deg, rgba(203,213,225,.3) 1px, transparent 1px),
+        linear-gradient(rgba(203,213,225,.24) 1px, transparent 1px),
+        radial-gradient(circle at 8% 0%, rgba(14,116,144,.09), transparent 30rem),
+        var(--bg);
+      background-size: 56px 56px, 56px 56px, auto, auto;
     }
-
-    ::selection { background: var(--selection); }
+    ::selection { background: #dbe4ef; }
     a { color: var(--blue); text-decoration: none; }
     a:hover { text-decoration: underline; text-underline-offset: 4px; }
     a:focus-visible, button:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 3px; }
     button { font: inherit; }
 
     .wrap { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 18px;
-      align-items: center;
-      padding: 14px 0;
-      backdrop-filter: blur(14px);
-    }
-    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--fg-strong); font: 700 13px/1 var(--mono); letter-spacing: -.02em; }
-    .brand-mark {
-      width: 14px;
-      height: 14px;
-      border: 2px solid var(--accent);
-      border-radius: 3px;
-      background: linear-gradient(135deg, var(--accent-soft), var(--paper));
-      box-shadow: inset -3px -3px 0 var(--surface-3);
-      transform: rotate(45deg);
-    }
-    .nav-links { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
-    .nav-links a {
-      color: var(--muted);
-      border: 1px solid transparent;
-      border-radius: 9px;
-      padding: 7px 10px;
-      font: 650 12px/1 var(--mono);
-    }
-    .nav-links a:hover, .nav-links a.active { background: var(--paper); border-color: var(--border); color: var(--accent); text-decoration: none; box-shadow: 0 1px 0 rgba(17,24,39,.03); }
+    .topbar { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 14px 0; backdrop-filter: blur(14px); }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--strong); font: 700 13px/1 var(--mono); }
+    .brand-mark { width: 13px; height: 13px; border: 2px solid var(--accent); transform: rotate(45deg); background: var(--accent-soft); }
+    nav { display: flex; flex-wrap: wrap; gap: 5px; }
+    nav a { padding: 7px 10px; border: 1px solid transparent; border-radius: 7px; color: var(--muted); font: 650 12px/1 var(--mono); }
+    nav a:hover, nav a.active { color: var(--accent); background: var(--paper); border-color: var(--border); text-decoration: none; }
 
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, .94fr) minmax(360px, 1.06fr);
-      gap: 24px;
-      align-items: stretch;
-      padding: 38px 0 24px;
-    }
-    .hero-copy {
-      position: relative;
-      background: var(--paper);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      box-shadow: var(--shadow-hard);
-      padding: clamp(24px, 4vw, 46px);
-      overflow: hidden;
-    }
-    .hero-copy::before {
-      content: "";
-      position: absolute;
-      inset: 14px auto auto 14px;
-      width: 72px;
-      height: 72px;
-      border-left: 1px solid var(--border);
-      border-top: 1px solid var(--border);
-      pointer-events: none;
-    }
-    .eyebrow { color: var(--accent); font: 750 11px/1.4 var(--mono); letter-spacing: .16em; text-transform: uppercase; margin: 0 0 28px; }
-    h1 {
-      margin: 0;
-      color: var(--fg-strong);
-      font-family: var(--display);
-      font-size: clamp(48px, 8.5vw, 104px);
-      line-height: .85;
-      letter-spacing: -.08em;
-      max-width: 8ch;
-    }
-    .role {
-      display: inline-flex;
-      margin: 22px 0 0;
-      padding: 9px 11px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      border-radius: 9px;
-      color: var(--fg-strong);
-      font: 750 13px/1 var(--mono);
-      letter-spacing: -.02em;
-    }
+    .hero { display: grid; grid-template-columns: minmax(0, .95fr) minmax(360px, 1.05fr); gap: 22px; padding: 38px 0 24px; }
+    .panel { border: 1px solid var(--border); background: var(--paper); box-shadow: var(--shadow); }
+    .intro { padding: clamp(26px, 4vw, 46px); border-radius: 4px 18px 4px 4px; position: relative; }
+    .intro::after { content: "PK / SRE"; position: absolute; top: 18px; right: 20px; color: var(--subtle); font: 700 10px/1 var(--mono); letter-spacing: .12em; }
+    .eyebrow { margin: 0 0 26px; color: var(--accent); font: 750 11px/1.4 var(--mono); letter-spacing: .15em; text-transform: uppercase; }
+    h1 { margin: 0; color: var(--strong); font-size: clamp(50px, 8.5vw, 102px); line-height: .86; letter-spacing: -.08em; max-width: 8ch; }
+    .role { display: inline-block; margin-top: 22px; padding: 8px 10px; border: 1px solid var(--border); background: var(--surface); color: var(--strong); font: 750 13px/1 var(--mono); }
     .lead { margin: 24px 0 0; max-width: 62ch; color: var(--muted); font-size: 17px; }
-    .focus-line { margin: 18px 0 0; color: var(--fg); font: 650 13px/1.6 var(--mono); }
-    .status-line { display: inline-flex; gap: 9px; align-items: center; margin-top: 18px; color: var(--muted); font: 600 12px/1.5 var(--mono); }
-    .status-dot { width: 8px; height: 8px; border-radius: 99px; background: var(--green); box-shadow: 0 0 0 4px var(--success-bg); }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-    .btn {
-      min-height: 42px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      background: var(--surface);
-      color: var(--fg);
-      padding: 10px 12px;
-      font: 700 12px/1 var(--mono);
-      box-shadow: inset 0 -1px 0 rgba(15,23,42,.04);
-      cursor: pointer;
-    }
-    .btn:hover { background: var(--accent-soft); border-color: var(--accent-ui); color: var(--accent); text-decoration: none; }
-    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .btn.primary:hover { background: var(--accent-ui); color: #fff; }
+    .focus { margin: 18px 0 0; color: var(--fg); font: 650 13px/1.65 var(--mono); }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+    .button { display: inline-flex; min-height: 40px; align-items: center; justify-content: center; padding: 9px 11px; border: 1px solid var(--border); background: var(--surface); color: var(--fg); font: 700 12px/1 var(--mono); }
+    .button:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .button.primary { background: var(--accent); border-color: var(--accent); color: white; }
 
-    .topology {
-      background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(238,242,246,.70));
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      box-shadow: var(--shadow-hard);
-      padding: 18px;
-      min-height: 560px;
-      position: relative;
-      overflow: hidden;
-    }
-    .topology::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(var(--border) 1px, transparent 1px);
-      background-size: 18px 18px;
-      opacity: .38;
-      pointer-events: none;
-    }
-    .map-head { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: start; gap: 12px; }
-    .map-title { margin: 0; color: var(--fg-strong); font: 800 13px/1.2 var(--mono); letter-spacing: -.02em; }
-    .map-meta { margin: 6px 0 0; color: var(--muted); font: 600 11px/1.4 var(--mono); }
-    .slo {
-      display: grid;
-      grid-template-columns: auto auto;
-      gap: 4px 8px;
-      align-items: center;
-      border: 1px solid var(--border);
-      background: var(--paper);
-      border-radius: 10px;
-      padding: 10px;
-      font: 700 11px/1 var(--mono);
-    }
-    .slo span:nth-child(odd) { color: var(--muted); }
-    .slo span:nth-child(even) { color: var(--green); text-align: right; }
-    .flow { position: relative; z-index: 1; height: 430px; margin-top: 16px; }
-    .wire { position: absolute; background: var(--surface-3); border: 1px solid var(--border); transform-origin: left center; height: 5px; border-radius: 99px; }
-    .wire::after { content: ""; display: block; width: 38%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, transparent, var(--accent-ui), transparent); animation: pulse 5s ease-in-out infinite; }
-    .wire.w1 { left: 13%; top: 35%; width: 26%; transform: rotate(-8deg); }
-    .wire.w2 { left: 39%; top: 32%; width: 24%; transform: rotate(13deg); }
-    .wire.w3 { left: 55%; top: 48%; width: 26%; transform: rotate(-19deg); }
-    .wire.w4 { left: 28%; top: 66%; width: 42%; transform: rotate(6deg); }
-    .node {
-      position: absolute;
-      width: min(190px, 38vw);
-      border: 1px solid var(--border);
-      background: var(--paper);
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, .07);
-      padding: 12px;
-      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
-    }
-    .node:hover { transform: translateY(-3px); border-color: var(--accent-ui); box-shadow: 0 14px 34px rgba(14, 116, 144, .14); }
-    .node strong { display: flex; align-items: center; gap: 7px; color: var(--fg-strong); font: 800 12px/1.2 var(--mono); }
-    .node p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
-    .node small { display: block; margin-top: 9px; color: var(--subtle); font: 700 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
-    .beacon { width: 8px; height: 8px; border-radius: 99px; background: var(--green); box-shadow: 0 0 0 4px var(--success-bg); }
-    .n-edge { left: 2%; top: 23%; }
-    .n-k8s { left: 32%; top: 10%; }
-    .n-apps { right: 2%; top: 25%; }
-    .n-data { left: 15%; bottom: 8%; }
-    .n-obs { right: 10%; bottom: 5%; }
-    .map-note { position: absolute; z-index: 1; left: 18px; right: 18px; bottom: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip { border: 1px solid var(--border); background: rgba(255,255,255,.72); color: var(--muted); border-radius: 999px; padding: 6px 9px; font: 700 11px/1 var(--mono); }
-    .chip.hot { color: var(--accent); background: var(--accent-soft); border-color: var(--accent-ui); }
+    .map { padding: 18px; border-radius: 18px 4px 4px 4px; min-height: 530px; position: relative; overflow: hidden; background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(238,242,246,.82)); }
+    .map::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(var(--border) 1px, transparent 1px); background-size: 18px 18px; opacity: .4; }
+    .map-head, .map-flow, .map-tags { position: relative; z-index: 1; }
+    .map-head { display: flex; justify-content: space-between; gap: 16px; }
+    .map-head h2 { margin: 0; font: 800 13px/1.2 var(--mono); color: var(--strong); }
+    .map-head p { margin: 5px 0 0; color: var(--muted); font: 600 11px/1.4 var(--mono); }
+    .status { border: 1px solid var(--border); background: var(--paper); padding: 9px; font: 700 10px/1.5 var(--mono); color: var(--green); }
+    .map-flow { height: 395px; margin-top: 20px; }
+    .node { position: absolute; width: min(190px, 38vw); border: 1px solid var(--border); background: var(--paper); padding: 12px; box-shadow: 0 8px 20px rgba(15,23,42,.06); }
+    .node b { display: block; color: var(--strong); font: 800 12px/1.2 var(--mono); }
+    .node p { margin: 7px 0 0; color: var(--muted); font-size: 12px; }
+    .n1 { left: 1%; top: 25%; } .n2 { left: 34%; top: 6%; } .n3 { right: 1%; top: 26%; } .n4 { left: 16%; bottom: 5%; } .n5 { right: 9%; bottom: 3%; }
+    .wire { position: absolute; height: 2px; background: var(--accent); opacity: .35; transform-origin: left center; }
+    .w1 { left: 17%; top: 36%; width: 28%; transform: rotate(-12deg); } .w2 { left: 47%; top: 28%; width: 26%; transform: rotate(15deg); } .w3 { left: 65%; top: 48%; width: 22%; transform: rotate(23deg); } .w4 { left: 30%; top: 66%; width: 39%; transform: rotate(5deg); }
+    .map-tags { display: flex; flex-wrap: wrap; gap: 6px; position: absolute; left: 18px; right: 18px; bottom: 18px; }
+    .tag { border: 1px solid var(--border); background: rgba(255,255,255,.8); padding: 5px 8px; color: var(--muted); font: 700 10px/1 var(--mono); }
 
-    .section { padding: 20px 0; }
-    .section-head { display: grid; grid-template-columns: 240px 1fr; gap: 24px; align-items: start; margin-bottom: 14px; }
-    .section-index { color: var(--accent); font: 800 11px/1.4 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
-    .section h2 { margin: 0; color: var(--fg-strong); font-size: clamp(30px, 4vw, 54px); line-height: .92; letter-spacing: -.055em; }
+    .section { padding: 24px 0; }
+    .section-head { display: grid; grid-template-columns: 200px 1fr; gap: 24px; margin-bottom: 14px; }
+    .index { color: var(--accent); font: 800 11px/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+    .section h2 { margin: 0; color: var(--strong); font-size: clamp(30px, 4vw, 52px); line-height: .94; letter-spacing: -.055em; }
 
-    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 18px; }
-    .statement { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 26px; }
-    .statement h3 { margin: 0; color: var(--fg-strong); font-size: 28px; letter-spacing: -.04em; line-height: 1; }
-    .statement p { color: var(--muted); margin: 18px 0 0; }
-    .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .fact { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; min-height: 110px; }
-    .fact b { display: block; color: var(--fg-strong); font-size: 14px; }
-    .fact span { display: block; margin-top: 8px; color: var(--muted); font-size: 13px; }
+    .about { display: grid; grid-template-columns: .95fr 1.05fr; gap: 18px; }
+    .copy-block { padding: 24px; border-radius: 4px; }
+    .copy-block h3 { margin: 0; color: var(--strong); font-size: 27px; line-height: 1; letter-spacing: -.04em; }
+    .copy-block p { margin: 16px 0 0; color: var(--muted); }
+    .facts { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px; }
+    .fact { border: 1px solid var(--border); background: var(--surface); padding: 15px; min-height: 108px; }
+    .fact b { display: block; color: var(--strong); font-size: 14px; }
+    .fact span { display: block; margin-top: 7px; color: var(--muted); font-size: 13px; }
 
-    .timeline { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 10px; }
-    .release { display: grid; grid-template-columns: 190px 1fr; gap: 20px; padding: 18px; border-radius: 10px; border: 1px solid transparent; }
-    .release + .release { border-top: 1px solid var(--border-soft); border-radius: 0; }
-    .release-code { color: var(--accent); font: 800 12px/1.6 var(--mono); }
-    .release h3 { margin: 0; color: var(--fg-strong); font-size: 20px; }
-    .release p { margin: 8px 0 0; color: var(--muted); }
-    .release ul { margin: 12px 0 0; padding-left: 18px; color: var(--fg); }
-    .release li + li { margin-top: 6px; }
+    .timeline { padding: 10px; border-radius: 4px; }
+    .job { display: grid; grid-template-columns: 210px 1fr; gap: 22px; padding: 19px; }
+    .job + .job { border-top: 1px solid var(--border-soft); }
+    .job-meta { color: var(--accent); font: 750 12px/1.6 var(--mono); }
+    .job h3 { margin: 0; color: var(--strong); font-size: 20px; }
+    .job p { margin: 7px 0 0; color: var(--muted); }
+    .job ul { margin: 12px 0 0; padding-left: 18px; }
+    .job li + li { margin-top: 6px; }
 
-    .work-layout { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; align-items: start; }
-    .case-main { background: var(--fg-strong); color: #f7f8fa; border-radius: 14px; padding: 26px; box-shadow: var(--shadow-hard); position: relative; overflow: hidden; }
-    .case-main::after { content: ""; position: absolute; inset: auto -40px -60px auto; width: 220px; height: 220px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; }
-    .case-main .eyebrow { color: #9be3ef; margin-bottom: 20px; }
-    .case-main h3 { color: #fff; margin: 0; font-size: clamp(30px, 4vw, 54px); line-height: .95; letter-spacing: -.055em; }
-    .case-main p { color: #cbd5e1; max-width: 68ch; }
-    .case-table { margin-top: 22px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .case-cell { border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); border-radius: 10px; padding: 14px; }
-    .case-cell b { display: block; color: #fff; font: 800 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .12em; }
-    .case-cell span { display: block; color: #cbd5e1; margin-top: 8px; font-size: 13px; }
-    .case-stack { display: grid; gap: 10px; }
-    .case-card { border: 1px solid var(--border); background: var(--paper); border-radius: 12px; padding: 16px; }
-    .case-card:nth-child(2) { margin-left: 34px; }
-    .case-card:nth-child(3) { margin-right: 34px; }
-    .case-card h3 { margin: 0; color: var(--fg-strong); font-size: 17px; }
-    .case-card p { margin: 8px 0 0; color: var(--muted); font-size: 13px; }
-    .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag { border: 1px solid var(--border-soft); background: var(--surface); border-radius: 999px; color: var(--muted); padding: 5px 8px; font: 700 10px/1 var(--mono); }
+    .work { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; align-items: start; }
+    .main-case { background: var(--strong); color: white; padding: 25px; }
+    .main-case .eyebrow { color: #9be3ef; margin-bottom: 18px; }
+    .main-case h3 { margin: 0; font-size: clamp(29px, 4vw, 50px); line-height: .95; letter-spacing: -.05em; }
+    .main-case p { color: #cbd5e1; }
+    .case-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; margin-top: 20px; }
+    .cell { border: 1px solid rgba(255,255,255,.15); padding: 13px; background: rgba(255,255,255,.05); }
+    .cell b { display: block; font: 800 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .12em; }
+    .cell span { display: block; margin-top: 7px; color: #cbd5e1; font-size: 13px; }
+    .cases { display: grid; gap: 9px; }
+    .case { border: 1px solid var(--border); background: var(--paper); padding: 15px; }
+    .case:nth-child(2) { margin-left: 28px; } .case:nth-child(3) { margin-right: 28px; }
+    .case h3 { margin: 0; color: var(--strong); font-size: 17px; }
+    .case p { margin: 7px 0 0; color: var(--muted); font-size: 13px; }
+    .case .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 11px; }
 
-    .rules { display: grid; grid-template-columns: repeat(7, minmax(150px, 1fr)); gap: 10px; overflow-x: auto; padding-bottom: 8px; }
-    .rule { min-height: 180px; border: 1px solid var(--border); background: var(--paper); border-radius: 12px; padding: 14px; box-shadow: var(--shadow); }
-    .rule b { display: block; color: var(--accent); font: 800 22px/1 var(--mono); }
-    .rule span { display: block; margin-top: 18px; color: var(--fg-strong); font-weight: 750; line-height: 1.25; }
-
-    .landscape { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
-    .land { background: var(--paper); border: 1px solid var(--border); border-radius: 12px; padding: 14px; min-height: 170px; }
-    .land:nth-child(1), .land:nth-child(3) { grid-column: span 2; }
-    .land:nth-child(2) { grid-column: span 4; }
-    .land:nth-child(4), .land:nth-child(5), .land:nth-child(6) { grid-column: span 2; }
-    .land h3 { margin: 0 0 10px; color: var(--fg-strong); font-size: 15px; }
-    .tech { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tech span { background: var(--surface); border: 1px solid var(--border-soft); border-radius: 999px; padding: 6px 8px; color: var(--muted); font: 700 11px/1 var(--mono); }
-    .tech span.core { color: var(--accent); border-color: var(--accent-ui); background: var(--accent-soft); }
-
-    .incident { display: grid; grid-template-columns: .8fr 1.2fr; gap: 18px; align-items: stretch; }
-    .incident-control, .incident-steps { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 20px; }
-    .incident-control p { color: var(--muted); }
-    .incident-steps { display: grid; gap: 8px; }
-    .step { display: flex; gap: 12px; align-items: center; border: 1px solid var(--border-soft); background: var(--surface); border-radius: 10px; padding: 11px; color: var(--muted); transition: background .2s ease, border-color .2s ease, color .2s ease; }
-    .step.active { color: var(--fg-strong); background: var(--accent-soft); border-color: var(--accent-ui); }
-    .step i { width: 22px; height: 22px; border-radius: 99px; display: inline-grid; place-items: center; background: var(--paper); border: 1px solid var(--border); font: 800 11px/1 var(--mono); font-style: normal; color: var(--accent); }
+    .landscape { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 9px; }
+    .land { border: 1px solid var(--border); background: var(--paper); padding: 14px; min-height: 155px; }
+    .land:nth-child(1), .land:nth-child(3) { grid-column: span 2; } .land:nth-child(2) { grid-column: span 4; } .land:nth-child(n+4) { grid-column: span 2; }
+    .land h3 { margin: 0 0 9px; color: var(--strong); font-size: 15px; }
+    .tech { display: flex; flex-wrap: wrap; gap: 5px; }
+    .tech span { border: 1px solid var(--border-soft); background: var(--surface); padding: 5px 7px; color: var(--muted); font: 700 10px/1 var(--mono); }
 
     .notes-contact { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .journal, .contact { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 20px; }
-    .entry { display: grid; grid-template-columns: 120px 1fr; gap: 14px; padding: 12px 0; border-top: 1px solid var(--border-soft); }
-    .entry:first-of-type { border-top: 0; }
-    .entry time { color: var(--accent); font: 800 11px/1.5 var(--mono); }
-    .entry a { color: var(--fg-strong); font-weight: 700; }
-    .contact h2 { font-size: clamp(30px, 4vw, 48px); line-height: .95; letter-spacing: -.055em; margin: 0; }
+    .journal, .contact { padding: 20px; }
+    .entry { display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 11px 0; border-top: 1px solid var(--border-soft); }
+    .entry time { color: var(--accent); font: 750 10px/1.5 var(--mono); }
+    .contact h2 { font-size: clamp(30px,4vw,46px); }
     .contact p { color: var(--muted); }
-    .contact-grid { display: grid; gap: 8px; margin-top: 18px; }
-    .contact-row { display: grid; grid-template-columns: 82px 1fr auto; gap: 10px; align-items: center; border: 1px solid var(--border-soft); background: var(--surface); border-radius: 10px; padding: 10px; font: 700 12px/1 var(--mono); }
-    .copy { border: 1px solid var(--border); background: var(--paper); color: var(--accent); border-radius: 8px; padding: 7px 9px; cursor: pointer; font: 800 11px/1 var(--mono); }
-
-    footer { padding: 30px 0 46px; color: var(--subtle); font: 700 12px/1.5 var(--mono); }
-    .footline { display: flex; flex-wrap: wrap; gap: 10px 18px; padding-top: 16px; border-top: 1px solid var(--border-soft); }
-
-    @keyframes pulse { 0%, 100% { transform: translateX(-45%); opacity: .25; } 50% { transform: translateX(165%); opacity: .95; } }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .wire::after { animation: none; }
-      .node, .step { transition: none; }
-    }
+    .contact-grid { display: grid; gap: 7px; margin-top: 17px; }
+    .contact-row { display: grid; grid-template-columns: 78px 1fr auto; gap: 10px; align-items: center; border: 1px solid var(--border-soft); background: var(--surface); padding: 9px; font: 700 12px/1 var(--mono); }
+    .copy { border: 1px solid var(--border); background: var(--paper); color: var(--accent); padding: 6px 8px; cursor: pointer; font: 800 10px/1 var(--mono); }
+    footer { padding: 28px 0 44px; color: var(--subtle); font: 700 11px/1.5 var(--mono); }
+    .footline { display: flex; flex-wrap: wrap; gap: 10px 18px; border-top: 1px solid var(--border-soft); padding-top: 15px; }
 
     @media (max-width: 980px) {
-      .topbar, .hero, .about-grid, .work-layout, .incident, .notes-contact { grid-template-columns: 1fr; }
-      .nav-links { justify-content: flex-start; }
-      .topology { min-height: auto; }
-      .flow { height: auto; display: grid; gap: 10px; margin-bottom: 54px; }
-      .wire { display: none; }
+      .hero, .about, .work, .notes-contact { grid-template-columns: 1fr; }
+      .map { min-height: auto; }
+      .map-flow { height: auto; display: grid; gap: 9px; margin: 18px 0 48px; }
       .node { position: static; width: auto; }
+      .wire { display: none; }
       .landscape { grid-template-columns: 1fr 1fr; }
       .land, .land:nth-child(n) { grid-column: span 1; }
-      .section-head { grid-template-columns: 1fr; gap: 8px; }
     }
-
     @media (max-width: 680px) {
       .wrap { width: min(100% - 22px, 1180px); }
       .topbar { position: static; }
-      .nav-links { display: none; }
+      nav { display: none; }
       .hero { padding-top: 18px; }
-      .hero-copy, .topology, .statement, .timeline, .case-main, .incident-control, .incident-steps, .journal, .contact { border-radius: 12px; padding: 16px; }
-      h1 { font-size: clamp(46px, 17vw, 68px); }
-      .actions { display: grid; grid-template-columns: 1fr; }
-      .btn { width: 100%; justify-content: flex-start; }
-      .facts, .case-table, .landscape { grid-template-columns: 1fr; }
-      .release { grid-template-columns: 1fr; gap: 8px; }
-      .case-card:nth-child(n) { margin: 0; }
-      .entry, .contact-row { grid-template-columns: 1fr; }
+      .intro, .map, .copy-block, .timeline, .main-case, .journal, .contact { padding: 16px; }
+      h1 { font-size: clamp(46px,17vw,68px); }
+      .actions { display: grid; }
+      .button { justify-content: flex-start; }
+      .section-head, .job, .entry, .contact-row { grid-template-columns: 1fr; gap: 7px; }
+      .facts, .case-grid, .landscape { grid-template-columns: 1fr; }
+      .case:nth-child(n) { margin: 0; }
       .copy { width: fit-content; }
     }
   </style>
@@ -360,168 +180,125 @@
 <body>
   <div class="wrap">
     <header class="topbar">
-      <a class="brand" href="/" aria-label="klyuev.icu home"><span class="brand-mark"></span><span>klyuev.icu / control-plane</span></a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#work">Work</a>
-        <a href="#principles">Principles</a>
-        <a href="#notes">Notes</a>
-        <a href="#contact">Contact</a>
+      <a class="brand" href="/" aria-label="klyuev.icu home"><span class="brand-mark"></span><span>klyuev.icu</span></a>
+      <nav aria-label="Primary navigation">
+        <a href="#about">About</a><a href="#experience">Experience</a><a href="#work">Work</a><a href="#stack">Stack</a><a href="#contact">Contact</a>
       </nav>
     </header>
 
     <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow">production infrastructure / reliability engineering</p>
-          <h1 id="hero-title">Pavel Klyuev</h1>
-          <span class="role">Site Reliability Engineer</span>
-          <p class="lead">I design, automate and operate infrastructure that remains predictable under failure, growth and constant change.</p>
-          <p class="focus-line">Kubernetes · Cloud Platforms · Reliability · Observability · Infrastructure as Code</p>
-          <span class="status-line"><span class="status-dot"></span>Currently focused on platform reliability, Kubernetes and production infrastructure.</span>
+      <section class="hero">
+        <div class="panel intro">
+          <p class="eyebrow">Kubernetes / platforms / production systems</p>
+          <h1>Pavel Klyuev</h1>
+          <span class="role">Principal SRE / Platform Engineer</span>
+          <p class="lead">Staff / Principal SRE and Platform Engineer with 10+ years of hands-on experience building, operating and improving production infrastructure across cloud and on-prem environments.</p>
+          <p class="focus">Kubernetes · Terraform · GitOps · CI/CD · Observability · Stateful services</p>
           <div class="actions">
-            <a class="btn primary" href="#experience">View experience</a>
-            <a class="btn" href="#work">Explore selected work</a>
-            <a class="btn" href="#contact">Contact me</a>
+            <a class="button primary" href="#experience">Experience</a>
+            <a class="button" href="#work">Selected work</a>
+            <a class="button" href="#contact">Contact</a>
           </div>
         </div>
 
-        <aside class="topology" aria-label="Infrastructure topology overview">
-          <div class="map-head">
-            <div>
-              <p class="map-title">production-system.map</p>
-              <p class="map-meta">traffic → platform → data → signals</p>
-            </div>
-            <div class="slo" aria-label="System status indicators">
-              <span>status</span><span>stable</span>
-              <span>mode</span><span>operate</span>
-              <span>blast radius</span><span>bounded</span>
-            </div>
-          </div>
-          <div class="flow" aria-hidden="true">
+        <aside class="panel map" aria-label="Infrastructure overview">
+          <div class="map-head"><div><h2>Current work</h2><p>platform engineering for SaaS, AI and data services</p></div><div class="status">production<br>remote</div></div>
+          <div class="map-flow">
             <span class="wire w1"></span><span class="wire w2"></span><span class="wire w3"></span><span class="wire w4"></span>
-            <div class="node n-edge"><strong><span class="beacon"></span>Edge</strong><p>User traffic, ingress, DNS, load balancing and routing boundaries.</p><small>contract first</small></div>
-            <div class="node n-k8s"><strong><span class="beacon"></span>Kubernetes</strong><p>Platforms across cloud, private clusters and production environments.</p><small>multi-cloud</small></div>
-            <div class="node n-apps"><strong><span class="beacon"></span>Applications</strong><p>Delivery standards, rollout safety, runtime config and ownership.</p><small>change control</small></div>
-            <div class="node n-data"><strong><span class="beacon"></span>Data plane</strong><p>PostgreSQL, ClickHouse, Redis, queues and migration verification.</p><small>rollback aware</small></div>
-            <div class="node n-obs"><strong><span class="beacon"></span>Signals</strong><p>Metrics, logs, alerting, incidents and operational feedback loops.</p><small>visible failure</small></div>
+            <div class="node n1"><b>Cloud and edge</b><p>AWS, GCP, Yandex Cloud, Hetzner, DNS, ingress and load balancing.</p></div>
+            <div class="node n2"><b>Kubernetes</b><p>GKE, Talos, k3s, managed clusters, bare metal and GitOps delivery.</p></div>
+            <div class="node n3"><b>Applications</b><p>Helm charts, CI/CD, GitLab Runner, probes, rollout and rollback logic.</p></div>
+            <div class="node n4"><b>Stateful systems</b><p>PostgreSQL, MySQL, ClickHouse, Kafka, Redis, S3 and backups.</p></div>
+            <div class="node n5"><b>Observability</b><p>VictoriaMetrics, Prometheus, Grafana, OpenSearch, alerts and dashboards.</p></div>
           </div>
-          <div class="map-note"><span class="chip hot">Kubernetes</span><span class="chip">Terraform</span><span class="chip">GitOps</span><span class="chip">PostgreSQL</span><span class="chip">VictoriaMetrics</span><span class="chip">Runbooks</span></div>
+          <div class="map-tags"><span class="tag">Terraform</span><span class="tag">Argo CD</span><span class="tag">Vault</span><span class="tag">LiveKit</span><span class="tag">Trino</span><span class="tag">NiFi</span></div>
         </aside>
       </section>
 
-      <section class="section" id="about" aria-labelledby="about-title">
-        <div class="section-head"><span class="section-index">01 / about</span><h2 id="about-title">Infrastructure work, not portfolio theatre.</h2></div>
-        <div class="about-grid">
-          <article class="statement">
-            <h3>I work at the intersection of infrastructure, software and operations.</h3>
-            <p>I build and operate Kubernetes platforms, automate infrastructure delivery, improve observability and help teams make production systems easier to understand and maintain.</p>
-            <p>My work is not limited to keeping systems online. I focus on removing operational uncertainty: standardizing delivery, reducing manual work, making failures visible and designing infrastructure that teams can safely change.</p>
+      <section class="section" id="about">
+        <div class="section-head"><span class="index">01 / about</span><h2>About</h2></div>
+        <div class="about">
+          <article class="panel copy-block">
+            <h3>I work with production infrastructure, platform engineering and data systems.</h3>
+            <p>My main areas are Kubernetes platforms, infrastructure automation, CI/CD, observability, secure access and stateful services.</p>
+            <p>I usually work on systems that are already in production: operating clusters, cleaning up delivery processes, troubleshooting incidents, planning migrations, improving monitoring and replacing manual steps with repeatable automation.</p>
           </article>
-          <div class="facts" aria-label="Compact facts">
-            <div class="fact"><b>Lead SRE work</b><span>Production ownership, incidents, platform reliability and operational standards.</span></div>
-            <div class="fact"><b>Kubernetes platforms</b><span>Cloud, private clusters, GitOps delivery and workload boundaries.</span></div>
-            <div class="fact"><b>Data migrations</b><span>Verification, rollback planning, transfer risk and cutover discipline.</span></div>
-            <div class="fact"><b>Observability</b><span>Metrics, alerting, logs, dashboards and signals that explain systems.</span></div>
+          <div class="facts">
+            <div class="fact"><b>10+ years</b><span>Production infrastructure across cloud and on-prem environments.</span></div>
+            <div class="fact"><b>Kubernetes platforms</b><span>GKE, Talos, k3s, AWS, Yandex Cloud, Hetzner and bare metal.</span></div>
+            <div class="fact"><b>Data platforms</b><span>NiFi, Airflow, Spark, Flink, Kafka, Trino, ClickHouse and Kubeflow.</span></div>
+            <div class="fact"><b>Production operations</b><span>Incidents, RCA, backups, migrations, upgrades and resource tuning.</span></div>
           </div>
         </div>
       </section>
 
-      <section class="section" id="experience" aria-labelledby="experience-title">
-        <div class="section-head"><span class="section-index">02 / changelog</span><h2 id="experience-title">Experience as platform releases.</h2></div>
-        <div class="timeline">
-          <article class="release">
-            <div class="release-code">platform.release/current<br>status: stable<br>scope: reliability</div>
-            <div><h3>Lead Site Reliability Engineer</h3><p>Production infrastructure, Kubernetes platforms, observability, databases, CI/CD and reliability.</p><ul><li>Designed and operated Kubernetes environments across AWS, GCP, Yandex Cloud, Hetzner and on-premise infrastructure.</li><li>Standardized infrastructure delivery with Terraform, Helm, Helmfile, Argo CD and GitOps practices.</li><li>Improved monitoring and alerting with Prometheus, VictoriaMetrics, Grafana and Alertmanager.</li><li>Planned and executed production database and platform migrations with verification and rollback thinking.</li></ul></div>
+      <section class="section" id="experience">
+        <div class="section-head"><span class="index">02 / experience</span><h2>Experience</h2></div>
+        <div class="panel timeline">
+          <article class="job">
+            <div class="job-meta">Sep 2023 — Present<br>Self-employed<br>Remote</div>
+            <div><h3>Principal SRE / Platform Engineering Consultant</h3><p>SRE and platform engineering work for SaaS, AI and data-platform projects.</p><ul><li>Built and operated Kubernetes clusters on Hetzner/Talos, AWS, GCP/GKE, Yandex Cloud and bare metal.</li><li>Set up GitOps and deployment workflows with Argo CD, Helm/Helmfile, Terraform, Ansible and GitLab CI/CD.</li><li>Standardized Helm charts, CI/CD templates, Kubernetes resources, probes, ingress/TLS, secrets, ServiceMonitor, rollout and rollback logic.</li><li>Operated observability and logging stacks with VictoriaMetrics, Prometheus, Grafana, Fluent Bit and Elasticsearch/OpenSearch.</li><li>Worked with PostgreSQL, MySQL/Percona, ProxySQL, Redis, ClickHouse, Kafka, Trino, S3/GCS/MinIO and backup workflows.</li><li>Supported AI, voice and data services including ASR/TTS, LiveKit/SIP, Milvus, Trino and Kafka.</li></ul></div>
           </article>
-          <article class="release">
-            <div class="release-code">data-platform/previous<br>status: shipped<br>scope: big-data</div>
-            <div><h3>SRE / Data Platform Engineering</h3><p>Infrastructure and operations for data platforms, analytical systems and production services.</p><ul><li>Worked with Kubernetes, CI/CD, observability, data tooling and operational automation.</li><li>Reduced manual operational paths by turning repeated actions into documented, reproducible workflows.</li></ul></div>
+          <article class="job">
+            <div class="job-meta">Dec 2020 — Present<br>Leroy Merlin / LMRU<br>Moscow, Russia</div>
+            <div><h3>Site Reliability Engineer — DataPlatform Team</h3><p>Kubernetes-based infrastructure for Big Data and ML workloads across GCP, Yandex Cloud and on-prem environments.</p><ul><li>Operated Kubeflow and data-platform services including NiFi, Airflow, Spark, Flink, Superset, OpenSearch and Kafka.</li><li>Designed Helm charts and automated infrastructure provisioning with Terraform, Packer, Ansible and Vault.</li><li>Implemented CI/CD pipelines in Jenkins and GitLab.</li><li>Worked on observability, TLS and LDAP integration, upgrades, resource tuning, incident response and production support.</li></ul></div>
+          </article>
+          <article class="job">
+            <div class="job-meta">May 2022 — Jan 2023<br>Snoonu<br>Doha, Qatar</div>
+            <div><h3>DevOps Tech Lead</h3><p>Prepared high-traffic marketplace and delivery infrastructure for FIFA World Cup 2022.</p><ul><li>Improved AWS autoscaling, resource usage and infrastructure costs.</li><li>Worked on Cloudflare, WAF, DNS, observability, disaster recovery and on-call processes.</li><li>Used Prometheus, Jaeger and OpenTelemetry for production visibility.</li></ul></div>
           </article>
         </div>
       </section>
 
-      <section class="section" id="work" aria-labelledby="work-title">
-        <div class="section-head"><span class="section-index">03 / selected work</span><h2 id="work-title">Engineering cases with constraints.</h2></div>
-        <div class="work-layout">
-          <article class="case-main">
-            <p class="eyebrow">case file / production database migration</p>
-            <h3>Make a risky cutover observable before making it fast.</h3>
-            <p>Large PostgreSQL transfers are not just a database task. They are a product cutover, data consistency check, rollback plan, application coordination and communication problem at the same time.</p>
-            <div class="case-table">
-              <div class="case-cell"><b>Context</b><span>Production data, multiple services and delayed switching windows.</span></div>
-              <div class="case-cell"><b>Decision</b><span>Prefer explicit verification, repeatable steps and rollback over clever one-shot migration.</span></div>
-              <div class="case-cell"><b>Implementation</b><span>Counts, index checks, target validation, runbooks and staged activation.</span></div>
-              <div class="case-cell"><b>Result</b><span>Lower operational uncertainty and clearer ownership during cutover.</span></div>
+      <section class="section" id="work">
+        <div class="section-head"><span class="index">03 / selected work</span><h2>Selected work</h2></div>
+        <div class="work">
+          <article class="main-case">
+            <p class="eyebrow">Production PostgreSQL migration</p>
+            <h3>Large database transfer and cutover</h3>
+            <p>Worked on production PostgreSQL migrations with data validation, index checks, application coordination, staged activation and rollback planning.</p>
+            <div class="case-grid">
+              <div class="cell"><b>Scope</b><span>Large databases, partitioned tables and multiple dependent services.</span></div>
+              <div class="cell"><b>Checks</b><span>Row counts, indexes, constraints, target state and application readiness.</span></div>
+              <div class="cell"><b>Cutover</b><span>Controlled switching, issue tracking and repeatable recovery steps.</span></div>
+              <div class="cell"><b>Tools</b><span>PostgreSQL, Kubernetes, scripts, runbooks and monitoring.</span></div>
             </div>
           </article>
-          <div class="case-stack">
-            <article class="case-card"><h3>Multi-cloud Kubernetes Platform</h3><p>Operating Kubernetes across several providers and private environments without pretending all clouds behave the same.</p><div class="tags"><span class="tag">GKE</span><span class="tag">EKS</span><span class="tag">Talos</span><span class="tag">Argo CD</span></div></article>
-            <article class="case-card"><h3>Observability Standardization</h3><p>Metrics, logs, alerts and dashboards shaped around ownership and incident questions.</p><div class="tags"><span class="tag">Prometheus</span><span class="tag">VictoriaMetrics</span><span class="tag">Grafana</span></div></article>
-            <article class="case-card"><h3>WebRTC in Private Kubernetes</h3><p>Media traffic, private nodes, TURN, Gateway API and boundaries between networking and application logic.</p><div class="tags"><span class="tag">WebRTC</span><span class="tag">TURN</span><span class="tag">Gateway API</span></div></article>
-            <article class="case-card"><h3>Infrastructure Delivery</h3><p>Terraform, Helm and GitOps practices for infrastructure changes that can be reviewed, reproduced and rolled back.</p><div class="tags"><span class="tag">Terraform</span><span class="tag">Helm</span><span class="tag">GitOps</span></div></article>
+          <div class="cases">
+            <article class="case"><h3>Kubernetes across multiple environments</h3><p>Operating managed and self-hosted clusters across GCP, AWS, Yandex Cloud, Hetzner and bare metal.</p><div class="tags"><span class="tag">GKE</span><span class="tag">Talos</span><span class="tag">Argo CD</span></div></article>
+            <article class="case"><h3>Observability stacks</h3><p>Metrics, logs, dashboards and alerting with VictoriaMetrics, Prometheus, Grafana, Fluent Bit and OpenSearch.</p><div class="tags"><span class="tag">VictoriaMetrics</span><span class="tag">Grafana</span></div></article>
+            <article class="case"><h3>WebRTC in private Kubernetes</h3><p>LiveKit, SIP, TURN and media traffic in a private GKE cluster without public IP addresses on worker nodes.</p><div class="tags"><span class="tag">LiveKit</span><span class="tag">TURN</span><span class="tag">GKE</span></div></article>
+            <article class="case"><h3>Infrastructure delivery</h3><p>Terraform, Helm, Helmfile, Argo CD and GitLab CI/CD for reviewed and repeatable infrastructure changes.</p><div class="tags"><span class="tag">Terraform</span><span class="tag">Helm</span><span class="tag">GitOps</span></div></article>
           </div>
         </div>
       </section>
 
-      <section class="section" id="principles" aria-labelledby="principles-title">
-        <div class="section-head"><span class="section-index">04 / reliability rules</span><h2 id="principles-title">How I approach reliability.</h2></div>
-        <div class="rules">
-          <div class="rule"><b>01</b><span>Make failure visible before trying to automate it.</span></div>
-          <div class="rule"><b>02</b><span>Prefer boring and understandable systems over unnecessary complexity.</span></div>
-          <div class="rule"><b>03</b><span>Automate repeated decisions, not only repeated commands.</span></div>
-          <div class="rule"><b>04</b><span>Treat observability as part of system design.</span></div>
-          <div class="rule"><b>05</b><span>Design migrations with rollback and verification in mind.</span></div>
-          <div class="rule"><b>06</b><span>Reduce operational uncertainty for the entire team.</span></div>
-          <div class="rule"><b>07</b><span>Solve problems at the correct architectural boundary.</span></div>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="tech-title">
-        <div class="section-head"><span class="section-index">05 / landscape</span><h2 id="tech-title">Technology landscape by responsibility.</h2></div>
+      <section class="section" id="stack">
+        <div class="section-head"><span class="index">04 / stack</span><h2>Technology stack</h2></div>
         <div class="landscape">
-          <article class="land"><h3>Platforms</h3><div class="tech"><span class="core">Kubernetes</span><span>Talos Linux</span><span>AWS EKS</span><span>Google GKE</span><span>Yandex Cloud</span><span>Hetzner</span></div></article>
-          <article class="land"><h3>Infrastructure Delivery</h3><div class="tech"><span class="core">Terraform</span><span>Helm</span><span>Helmfile</span><span>Argo CD</span><span>Ansible</span><span>Packer</span><span>GitLab CI</span><span>Jenkins</span></div></article>
-          <article class="land"><h3>Observability</h3><div class="tech"><span class="core">Prometheus</span><span>VictoriaMetrics</span><span>Grafana</span><span>Loki</span><span>OpenSearch</span><span>Alertmanager</span></div></article>
-          <article class="land"><h3>Data and Messaging</h3><div class="tech"><span>PostgreSQL</span><span>ClickHouse</span><span>Kafka</span><span>RabbitMQ</span><span>Redis</span><span>Valkey</span><span>MySQL</span></div></article>
-          <article class="land"><h3>Security and Access</h3><div class="tech"><span>Vault</span><span>Teleport</span><span>OIDC</span><span>Dex</span><span>Workload Identity</span></div></article>
-          <article class="land"><h3>Networking</h3><div class="tech"><span>NGINX Ingress</span><span>Istio</span><span>Gateway API</span><span>DNS</span><span>WebRTC</span><span>TURN</span></div></article>
+          <article class="land"><h3>Platforms</h3><div class="tech"><span>Kubernetes</span><span>Talos</span><span>k3s</span><span>GKE</span><span>AWS</span><span>Yandex Cloud</span><span>Hetzner</span></div></article>
+          <article class="land"><h3>Infrastructure and delivery</h3><div class="tech"><span>Terraform</span><span>Helm</span><span>Helmfile</span><span>Argo CD</span><span>Ansible</span><span>Packer</span><span>GitLab CI/CD</span><span>Jenkins</span><span>Vault</span></div></article>
+          <article class="land"><h3>Observability</h3><div class="tech"><span>Prometheus</span><span>VictoriaMetrics</span><span>Grafana</span><span>Alertmanager</span><span>Fluent Bit</span><span>OpenSearch</span></div></article>
+          <article class="land"><h3>Databases and messaging</h3><div class="tech"><span>PostgreSQL</span><span>MySQL</span><span>ClickHouse</span><span>Kafka</span><span>RabbitMQ</span><span>Redis</span><span>Valkey</span></div></article>
+          <article class="land"><h3>Data and ML</h3><div class="tech"><span>NiFi</span><span>Airflow</span><span>Spark</span><span>Flink</span><span>Trino</span><span>Superset</span><span>Kubeflow</span><span>Milvus</span></div></article>
+          <article class="land"><h3>Networking and access</h3><div class="tech"><span>NGINX Ingress</span><span>Istio</span><span>Gateway API</span><span>DNS</span><span>OIDC</span><span>Teleport</span><span>WebRTC</span><span>TURN</span></div></article>
         </div>
       </section>
 
-      <section class="section" aria-labelledby="incident-title">
-        <div class="section-head"><span class="section-index">06 / incident mode</span><h2 id="incident-title">When production fails.</h2></div>
-        <div class="incident">
-          <div class="incident-control"><p class="eyebrow">interactive runbook</p><h3>Start incident</h3><p>Not a game. A small model of how I approach incidents: identify impact, inspect signals, test hypotheses, mitigate and document prevention.</p><button class="btn primary" id="incidentButton" type="button">Start incident</button></div>
-          <div class="incident-steps" aria-live="polite">
-            <div class="step"><i>1</i><span>Establish impact</span></div>
-            <div class="step"><i>2</i><span>Check recent changes</span></div>
-            <div class="step"><i>3</i><span>Inspect signals</span></div>
-            <div class="step"><i>4</i><span>Form and test hypotheses</span></div>
-            <div class="step"><i>5</i><span>Mitigate</span></div>
-            <div class="step"><i>6</i><span>Verify recovery</span></div>
-            <div class="step"><i>7</i><span>Document and prevent recurrence</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section notes-contact" id="notes" aria-label="Notes and contact">
-        <article class="journal">
-          <p class="eyebrow">engineering journal</p>
-          <h2>Writing and knowledge sharing.</h2>
-          <div class="entry"><time>2026-07-08</time><a href="https://t.me/kubertat" target="_blank" rel="noopener">XY Problem at the infrastructure boundary</a></div>
-          <div class="entry"><time>category</time><span>Kubernetes · SRE practices · Observability · Infrastructure architecture · Incident analysis</span></div>
-          <div class="entry"><time>channel</time><a href="https://t.me/kubertat" target="_blank" rel="noopener">t.me/kubertat</a></div>
+      <section class="section notes-contact" id="contact">
+        <article class="panel journal">
+          <p class="eyebrow">Notes</p>
+          <h2>Кубертатный период</h2>
+          <div class="entry"><time>Telegram</time><a href="https://t.me/kubertat" target="_blank" rel="noopener">t.me/kubertat</a></div>
+          <div class="entry"><time>Topics</time><span>Kubernetes, SRE, infrastructure, observability, incidents and engineering anti-patterns.</span></div>
         </article>
-
-        <article class="contact" id="contact">
-          <p class="eyebrow">contact</p>
-          <h2>Let’s build infrastructure that teams can trust.</h2>
-          <p>I am open to conversations about Site Reliability Engineering, platform engineering, Kubernetes infrastructure and complex production systems.</p>
+        <article class="panel contact">
+          <p class="eyebrow">Contact</p>
+          <h2>Contact</h2>
+          <p>For SRE, platform engineering, Kubernetes and production infrastructure work.</p>
           <div class="contact-grid">
-            <div class="contact-row"><span>Email</span><a href="mailto:pavel@klyuev.icu">pavel@klyuev.icu</a><button class="copy" type="button" data-copy="pavel@klyuev.icu">copy</button></div>
-            <div class="contact-row"><span>Chatmail</span><span>pavel@chat.klyuev.icu</span><button class="copy" type="button" data-copy="pavel@chat.klyuev.icu">copy</button></div>
+            <div class="contact-row"><span>Email</span><a href="mailto:pavel@klyuev.icu">pavel@klyuev.icu</a><button class="copy" data-copy="pavel@klyuev.icu">copy</button></div>
+            <div class="contact-row"><span>Chatmail</span><span>pavel@chat.klyuev.icu</span><button class="copy" data-copy="pavel@chat.klyuev.icu">copy</button></div>
             <div class="contact-row"><span>Telegram</span><a href="https://t.me/pklyuev" target="_blank" rel="noopener">@pklyuev</a><span></span></div>
             <div class="contact-row"><span>GitHub</span><a href="https://github.com/pashtet04" target="_blank" rel="noopener">@pashtet04</a><span></span></div>
             <div class="contact-row"><span>LinkedIn</span><a href="https://www.linkedin.com/in/pklyuev/" target="_blank" rel="noopener">/in/pklyuev</a><span></span></div>
@@ -530,51 +307,27 @@
       </section>
     </main>
 
-    <footer>
-      <div class="footline"><span>klyuev.icu</span><span>static profile page</span><span>no trackers</span><span>control-plane inspired</span></div>
-    </footer>
+    <footer><div class="footline"><span>klyuev.icu</span><span>static profile page</span><span>no trackers</span></div></footer>
   </div>
 
   <script>
-    const navLinks = [...document.querySelectorAll('.nav-links a')];
-    const sections = navLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
-      });
-    }, { rootMargin: '-40% 0px -55% 0px' });
+    const links = [...document.querySelectorAll('nav a')];
+    const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+    }), { rootMargin: '-40% 0px -55% 0px' });
     sections.forEach(section => observer.observe(section));
 
-    document.querySelectorAll('[data-copy]').forEach(button => {
-      button.addEventListener('click', async () => {
-        const value = button.dataset.copy;
-        try {
-          await navigator.clipboard.writeText(value);
-          const old = button.textContent;
-          button.textContent = 'copied';
-          setTimeout(() => { button.textContent = old; }, 1200);
-        } catch (_) {
-          window.prompt('Copy value', value);
-        }
-      });
-    });
-
-    const incidentButton = document.getElementById('incidentButton');
-    const steps = [...document.querySelectorAll('.step')];
-    let incidentTimer;
-    incidentButton?.addEventListener('click', () => {
-      clearInterval(incidentTimer);
-      steps.forEach(step => step.classList.remove('active'));
-      let index = 0;
-      steps[index].classList.add('active');
-      incidentTimer = setInterval(() => {
-        steps[index]?.classList.remove('active');
-        index += 1;
-        if (index >= steps.length) { clearInterval(incidentTimer); return; }
-        steps[index].classList.add('active');
-      }, 900);
-    });
+    document.querySelectorAll('[data-copy]').forEach(button => button.addEventListener('click', async () => {
+      const value = button.dataset.copy;
+      try {
+        await navigator.clipboard.writeText(value);
+        const previous = button.textContent;
+        button.textContent = 'copied';
+        setTimeout(() => button.textContent = previous, 1200);
+      } catch (_) { window.prompt('Copy value', value); }
+    }));
   </script>
 </body>
 </html>

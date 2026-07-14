@@ -1,0 +1,14 @@
+{
+  "channel": "kubertat",
+  "post": null,
+  "url": "https://t.me/kubertat",
+  "text": "Open the Telegram channel to read the latest post.",
+  "published_at": null,
+  "views": null,
+  "comments": null,
+  "reactions": null,
+  "forwards": null,
+  "image": null,
+  "error": "ConnectionError: HTTPSConnectionPool(host='t.me', port=443): Max retries exceeded with url: /s/kubertat (Caused by NameResolutionError(\"HTTPSConnection(host='t.me', port=443): Failed to resolve 't.me' ([Errno -2] Name or service not known)\"))",
+  "updated_at": "2026-07-14T11:19:40.609989+00:00"
+}

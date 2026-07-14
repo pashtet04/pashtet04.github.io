@@ -28,7 +28,7 @@ jobs:
       - run: python scripts/update_telegram.py
       - name: Commit feed update
         run: |
-          if git diff --quiet -- telegram-latest.json; then
+          if [ -z "$(git status --porcelain -- telegram-latest.json)" ]; then
             echo "Telegram feed is unchanged"
             exit 0
           fi

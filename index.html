@@ -14,173 +14,13 @@
   {"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"Pavel Klyuev","jobTitle":"Principal SRE / Platform Engineer","url":"https://klyuev.icu/","sameAs":["https://github.com/pashtet04","https://t.me/pklyuev","https://www.linkedin.com/in/pklyuev/","https://twitter.com/pklyuev"]}}
   </script>
   <style>
-    :root {
-      color-scheme: light;
-      --bg: #f7f8fa;
-      --surface: #eef2f6;
-      --paper: #fffefb;
-      --border: #cbd5e1;
-      --border-soft: #d6dee8;
-      --fg: #1f2933;
-      --strong: #111827;
-      --muted: #64748b;
-      --subtle: #94a3b8;
-      --accent: #0e7490;
-      --accent-soft: #dceef2;
-      --blue: #2563eb;
-      --green: #2f855a;
-      --shadow: 0 10px 30px rgba(15, 23, 42, .07);
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--fg);
-      font-family: var(--sans);
-      line-height: 1.55;
-      background:
-        linear-gradient(90deg, rgba(203,213,225,.3) 1px, transparent 1px),
-        linear-gradient(rgba(203,213,225,.24) 1px, transparent 1px),
-        radial-gradient(circle at 8% 0%, rgba(14,116,144,.09), transparent 30rem),
-        var(--bg);
-      background-size: 56px 56px, 56px 56px, auto, auto;
-    }
-    ::selection { background: #dbe4ef; }
-    a { color: var(--blue); text-decoration: none; }
-    a:hover { text-decoration: underline; text-underline-offset: 4px; }
-    a:focus-visible, button:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 3px; }
-    button { font: inherit; }
-
-    .wrap { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
-    .topbar { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 14px 0; backdrop-filter: blur(14px); }
-    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--strong); font: 700 13px/1 var(--mono); }
-    .brand-mark { width: 13px; height: 13px; border: 2px solid var(--accent); transform: rotate(45deg); background: var(--accent-soft); }
-    nav { display: flex; flex-wrap: wrap; gap: 5px; }
-    nav a { padding: 7px 10px; border: 1px solid transparent; border-radius: 7px; color: var(--muted); font: 650 12px/1 var(--mono); }
-    nav a:hover, nav a.active { color: var(--accent); background: var(--paper); border-color: var(--border); text-decoration: none; }
-
-    .hero { display: grid; grid-template-columns: minmax(0, .95fr) minmax(360px, 1.05fr); gap: 22px; padding: 38px 0 24px; }
-    .panel { border: 1px solid var(--border); background: var(--paper); box-shadow: var(--shadow); }
-    .intro { padding: clamp(26px, 4vw, 46px); border-radius: 4px 18px 4px 4px; position: relative; }
-    .intro::after { content: "PK / SRE"; position: absolute; top: 18px; right: 20px; color: var(--subtle); font: 700 10px/1 var(--mono); letter-spacing: .12em; }
-    .eyebrow { margin: 0 0 26px; color: var(--accent); font: 750 11px/1.4 var(--mono); letter-spacing: .15em; text-transform: uppercase; }
-    h1 { margin: 0; color: var(--strong); font-size: clamp(50px, 8.5vw, 102px); line-height: .86; letter-spacing: -.08em; max-width: 8ch; }
-    .role { display: inline-block; margin-top: 22px; padding: 8px 10px; border: 1px solid var(--border); background: var(--surface); color: var(--strong); font: 750 13px/1 var(--mono); }
-    .lead { margin: 24px 0 0; max-width: 62ch; color: var(--muted); font-size: 17px; }
-    .focus { margin: 18px 0 0; color: var(--fg); font: 650 13px/1.65 var(--mono); }
-    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
-    .button { display: inline-flex; min-height: 40px; align-items: center; justify-content: center; padding: 9px 11px; border: 1px solid var(--border); background: var(--surface); color: var(--fg); font: 700 12px/1 var(--mono); }
-    .button:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); text-decoration: none; }
-    .button.primary { background: var(--accent); border-color: var(--accent); color: white; }
-
-    .lifecycle { padding: 20px; border-radius: 18px 4px 4px 4px; min-height: 530px; position: relative; overflow: hidden; background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(238,242,246,.82)); }
-    .lifecycle::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(var(--border) 1px, transparent 1px); background-size: 18px 18px; opacity: .4; }
-    .cycle-head, .cycle-body { position: relative; z-index: 1; }
-    .cycle-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
-    .cycle-head h2 { margin: 0; color: var(--strong); font: 800 13px/1.2 var(--mono); }
-    .cycle-head p { margin: 5px 0 0; color: var(--muted); font: 600 11px/1.4 var(--mono); }
-    .status { border: 1px solid var(--border); background: var(--paper); padding: 9px; font: 700 10px/1.5 var(--mono); color: var(--green); }
-    .cycle-body { margin-top: 38px; }
-    .lane { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 10px; }
-    .stage { border: 1px solid var(--border); background: var(--paper); padding: 15px; min-height: 130px; box-shadow: 0 8px 20px rgba(15,23,42,.05); }
-    .stage b { display: block; color: var(--strong); font: 800 12px/1.2 var(--mono); letter-spacing: .02em; }
-    .stage p { margin: 10px 0 0; color: var(--muted); font-size: 13px; line-height: 1.48; }
-    .arrow { align-self: center; color: var(--accent); font: 900 22px/1 var(--mono); opacity: .58; }
-    .cycle-turn { display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin: 12px 0; color: var(--accent); font: 800 10px/1 var(--mono); letter-spacing: .13em; text-transform: uppercase; }
-    .cycle-turn::after { content: "↓"; font-size: 20px; line-height: 1; }
-    .stage.plan { border-top: 4px solid var(--accent); }
-    .stage.deploy, .stage.run { background: #fbfdff; }
-    .stage.observe { border-bottom: 4px solid var(--accent-soft); }
-    .stage.improve { border-left: 4px solid var(--accent); }
-
-    .section { padding: 24px 0; }
-    .section-head { display: grid; grid-template-columns: 200px 1fr; gap: 24px; margin-bottom: 14px; }
-    .index { color: var(--accent); font: 800 11px/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
-    .section h2 { margin: 0; color: var(--strong); font-size: clamp(30px, 4vw, 52px); line-height: .94; letter-spacing: -.055em; }
-    .copy-block { padding: 26px; border-radius: 4px; max-width: 850px; }
-    .copy-block h3 { margin: 0; color: var(--strong); font-size: 27px; line-height: 1; letter-spacing: -.04em; }
-    .copy-block p { margin: 16px 0 0; color: var(--muted); }
-
-    .timeline { padding: 10px; border-radius: 4px; }
-    .job { display: grid; grid-template-columns: 210px 1fr; gap: 22px; padding: 19px; }
-    .job + .job { border-top: 1px solid var(--border-soft); }
-    .job-meta { color: var(--accent); font: 750 12px/1.6 var(--mono); }
-    .job h3 { margin: 0; color: var(--strong); font-size: 20px; }
-    .job p { margin: 7px 0 0; color: var(--muted); }
-    .job ul { margin: 12px 0 0; padding-left: 18px; }
-    .job li + li { margin-top: 6px; }
-
-    .work { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; align-items: start; }
-    .main-case { background: var(--strong); color: white; padding: 25px; }
-    .main-case .eyebrow { color: #9be3ef; margin-bottom: 18px; }
-    .main-case h3 { margin: 0; font-size: clamp(29px, 4vw, 50px); line-height: .95; letter-spacing: -.05em; }
-    .main-case p { color: #cbd5e1; }
-    .case-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; margin-top: 20px; }
-    .cell { border: 1px solid rgba(255,255,255,.15); padding: 13px; background: rgba(255,255,255,.05); }
-    .cell b { display: block; font: 800 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .12em; }
-    .cell span { display: block; margin-top: 7px; color: #cbd5e1; font-size: 13px; }
-    .cases { display: grid; gap: 9px; }
-    .case { border: 1px solid var(--border); background: var(--paper); padding: 15px; }
-    .case:nth-child(2) { margin-left: 28px; }
-    .case:nth-child(3) { margin-right: 28px; }
-    .case h3 { margin: 0; color: var(--strong); font-size: 17px; }
-    .case p { margin: 7px 0 0; color: var(--muted); font-size: 13px; }
-    .case .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 11px; }
-    .tag { border: 1px solid var(--border); background: rgba(255,255,255,.8); padding: 5px 8px; color: var(--muted); font: 700 10px/1 var(--mono); }
-
-    .landscape { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 9px; }
-    .land { border: 1px solid var(--border); background: var(--paper); padding: 14px; min-height: 155px; }
-    .land:nth-child(1), .land:nth-child(3) { grid-column: span 2; }
-    .land:nth-child(2) { grid-column: span 4; }
-    .land:nth-child(n+4) { grid-column: span 2; }
-    .land h3 { margin: 0 0 9px; color: var(--strong); font-size: 15px; }
-    .tech { display: flex; flex-wrap: wrap; gap: 5px; }
-    .tech span { border: 1px solid var(--border-soft); background: var(--surface); padding: 5px 7px; color: var(--muted); font: 700 10px/1 var(--mono); }
-
-    .notes-contact { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .journal, .contact { padding: 20px; }
-    .entry { display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 11px 0; border-top: 1px solid var(--border-soft); }
-    .entry:first-of-type { border-top: 0; }
-    .entry time { color: var(--accent); font: 750 10px/1.5 var(--mono); }
-    .contact h2 { font-size: clamp(30px,4vw,46px); }
-    .contact p { color: var(--muted); }
-    .contact-grid { display: grid; gap: 7px; margin-top: 17px; }
-    .contact-row { display: grid; grid-template-columns: 78px 1fr auto; gap: 10px; align-items: center; border: 1px solid var(--border-soft); background: var(--surface); padding: 9px; font: 700 12px/1 var(--mono); }
-    .copy { border: 1px solid var(--border); background: var(--paper); color: var(--accent); padding: 6px 8px; cursor: pointer; font: 800 10px/1 var(--mono); }
-    .back-top { position: fixed; right: 22px; bottom: 22px; z-index: 20; width: 44px; height: 44px; border: 1px solid var(--border); background: var(--paper); color: var(--accent); box-shadow: var(--shadow); display: grid; place-items: center; font: 900 18px/1 var(--mono); opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .16s ease, transform .16s ease, border-color .16s ease; }
-    .back-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
-    .back-top:hover { border-color: var(--accent); background: var(--accent-soft); }
-    footer { padding: 28px 0 44px; color: var(--subtle); font: 700 11px/1.5 var(--mono); }
-    .footline { display: flex; flex-wrap: wrap; gap: 10px 18px; border-top: 1px solid var(--border-soft); padding-top: 15px; }
-
-    @media (max-width: 980px) {
-      .hero, .work, .notes-contact { grid-template-columns: 1fr; }
-      .lifecycle { min-height: auto; }
-      .lane { grid-template-columns: 1fr; }
-      .arrow { justify-self: center; transform: rotate(90deg); }
-      .lane.bottom .arrow { transform: rotate(-90deg); }
-      .cycle-turn { justify-content: flex-start; }
-      .landscape { grid-template-columns: 1fr 1fr; }
-      .land, .land:nth-child(n) { grid-column: span 1; }
-    }
-    @media (max-width: 680px) {
-      .wrap { width: min(100% - 22px, 1180px); }
-      .topbar { position: static; }
-      nav { display: none; }
-      .hero { padding-top: 18px; }
-      .intro, .lifecycle, .copy-block, .timeline, .main-case, .journal, .contact { padding: 16px; }
-      h1 { font-size: clamp(46px,17vw,68px); }
-      .actions { display: grid; }
-      .button { justify-content: flex-start; }
-      .section-head, .job, .entry, .contact-row { grid-template-columns: 1fr; gap: 7px; }
-      .case-grid, .landscape { grid-template-columns: 1fr; }
-      .case:nth-child(n) { margin: 0; }
-      .copy { width: fit-content; }
-      .back-top { right: 14px; bottom: 14px; width: 42px; height: 42px; }
-    }
+    :root{color-scheme:light;--bg:#f7f8fa;--surface:#eef2f6;--paper:#fffefb;--border:#cbd5e1;--border-soft:#d6dee8;--fg:#1f2933;--strong:#111827;--muted:#64748b;--subtle:#94a3b8;--accent:#0e7490;--accent-soft:#dceef2;--blue:#2563eb;--green:#2f855a;--shadow:0 10px 30px rgba(15,23,42,.07);--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--fg);font-family:var(--sans);line-height:1.55;background:linear-gradient(90deg,rgba(203,213,225,.3) 1px,transparent 1px),linear-gradient(rgba(203,213,225,.24) 1px,transparent 1px),radial-gradient(circle at 8% 0%,rgba(14,116,144,.09),transparent 30rem),var(--bg);background-size:56px 56px,56px 56px,auto,auto}::selection{background:#dbe4ef}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:4px}a:focus-visible,button:focus-visible{outline:3px solid var(--accent-soft);outline-offset:3px}button{font:inherit}.wrap{width:min(1180px,calc(100% - 36px));margin:0 auto}.topbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:14px 0;backdrop-filter:blur(14px)}.brand{display:inline-flex;align-items:center;gap:10px;color:var(--strong);font:700 13px/1 var(--mono)}.brand-mark{width:13px;height:13px;border:2px solid var(--accent);transform:rotate(45deg);background:var(--accent-soft)}nav{display:flex;flex-wrap:wrap;gap:5px}nav a{padding:7px 10px;border:1px solid transparent;border-radius:7px;color:var(--muted);font:650 12px/1 var(--mono)}nav a:hover,nav a.active{color:var(--accent);background:var(--paper);border-color:var(--border);text-decoration:none}
+    .hero{display:grid;grid-template-columns:minmax(0,.95fr) minmax(360px,1.05fr);gap:22px;padding:38px 0 24px}.panel{border:1px solid var(--border);background:var(--paper);box-shadow:var(--shadow)}.intro{padding:clamp(26px,4vw,46px);border-radius:4px 18px 4px 4px;position:relative}.intro::after{content:"PK / SRE";position:absolute;top:18px;right:20px;color:var(--subtle);font:700 10px/1 var(--mono);letter-spacing:.12em}.eyebrow{margin:0 0 26px;color:var(--accent);font:750 11px/1.4 var(--mono);letter-spacing:.15em;text-transform:uppercase}h1{margin:0;color:var(--strong);font-size:clamp(50px,8.5vw,102px);line-height:.86;letter-spacing:-.08em;max-width:8ch}.role{display:inline-block;margin-top:22px;padding:8px 10px;border:1px solid var(--border);background:var(--surface);color:var(--strong);font:750 13px/1 var(--mono)}.lead{margin:24px 0 0;max-width:62ch;color:var(--muted);font-size:17px}.focus{margin:18px 0 0;color:var(--fg);font:650 13px/1.65 var(--mono)}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}.button{display:inline-flex;min-height:40px;align-items:center;justify-content:center;padding:9px 11px;border:1px solid var(--border);background:var(--surface);color:var(--fg);font:700 12px/1 var(--mono)}.button:hover{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);text-decoration:none}.button.primary{background:var(--accent);border-color:var(--accent);color:white}
+    .lifecycle{padding:20px;border-radius:18px 4px 4px 4px;min-height:530px;position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(238,242,246,.82))}.lifecycle::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--border) 1px,transparent 1px);background-size:18px 18px;opacity:.4}.cycle-head,.cycle-body{position:relative;z-index:1}.cycle-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.cycle-head h2{margin:0;color:var(--strong);font:800 13px/1.2 var(--mono)}.cycle-head p{margin:5px 0 0;color:var(--muted);font:600 11px/1.4 var(--mono)}.status{border:1px solid var(--border);background:var(--paper);padding:9px;font:700 10px/1.5 var(--mono);color:var(--green)}.cycle-body{margin-top:32px}.lane{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:10px}.stage{border:1px solid var(--border);background:var(--paper);padding:15px;min-height:138px;box-shadow:0 8px 20px rgba(15,23,42,.05)}.stage b{display:block;color:var(--strong);font:800 12px/1.2 var(--mono);letter-spacing:.02em}.stage p{margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.48}.arrow{align-self:center;color:var(--accent);font:900 22px/1 var(--mono);opacity:.58}.cycle-turn{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin:13px 0;color:var(--accent);font:800 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase}.cycle-turn::after{content:"↓";font-size:20px;line-height:1}.stage.plan{border-top:4px solid var(--accent)}.stage.deploy,.stage.run{background:#fbfdff}.stage.observe{border-bottom:4px solid var(--accent-soft)}.stage.improve{border-left:4px solid var(--accent)}
+    .section{padding:24px 0}.section-head{display:grid;grid-template-columns:200px 1fr;gap:24px;margin-bottom:14px}.index{color:var(--accent);font:800 11px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase}.section h2{margin:0;color:var(--strong);font-size:clamp(30px,4vw,52px);line-height:.94;letter-spacing:-.055em}.copy-block{padding:26px;border-radius:4px;max-width:850px}.copy-block h3{margin:0;color:var(--strong);font-size:27px;line-height:1;letter-spacing:-.04em}.copy-block p{margin:16px 0 0;color:var(--muted)}.timeline{padding:10px;border-radius:4px}.job{display:grid;grid-template-columns:210px 1fr;gap:22px;padding:19px}.job+.job{border-top:1px solid var(--border-soft)}.job-meta{color:var(--accent);font:750 12px/1.6 var(--mono)}.job h3{margin:0;color:var(--strong);font-size:20px}.job p{margin:7px 0 0;color:var(--muted)}.job ul{margin:12px 0 0;padding-left:18px}.job li+li{margin-top:6px}.work{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}.main-case{background:var(--strong);color:white;padding:25px}.main-case .eyebrow{color:#9be3ef;margin-bottom:18px}.main-case h3{margin:0;font-size:clamp(29px,4vw,50px);line-height:.95;letter-spacing:-.05em}.main-case p{color:#cbd5e1}.case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:20px}.cell{border:1px solid rgba(255,255,255,.15);padding:13px;background:rgba(255,255,255,.05)}.cell b{display:block;font:800 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.12em}.cell span{display:block;margin-top:7px;color:#cbd5e1;font-size:13px}.cases{display:grid;gap:9px}.case{border:1px solid var(--border);background:var(--paper);padding:15px}.case:nth-child(2){margin-left:28px}.case:nth-child(3){margin-right:28px}.case h3{margin:0;color:var(--strong);font-size:17px}.case p{margin:7px 0 0;color:var(--muted);font-size:13px}.case .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}.tag{border:1px solid var(--border);background:rgba(255,255,255,.8);padding:5px 8px;color:var(--muted);font:700 10px/1 var(--mono)}.landscape{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}.land{border:1px solid var(--border);background:var(--paper);padding:14px;min-height:155px}.land:nth-child(1),.land:nth-child(3){grid-column:span 2}.land:nth-child(2){grid-column:span 4}.land:nth-child(n+4){grid-column:span 2}.land h3{margin:0 0 9px;color:var(--strong);font-size:15px}.tech{display:flex;flex-wrap:wrap;gap:5px}.tech span{border:1px solid var(--border-soft);background:var(--surface);padding:5px 7px;color:var(--muted);font:700 10px/1 var(--mono)}.notes-contact{display:grid;grid-template-columns:1fr 1fr;gap:18px}.journal,.contact{padding:20px}.entry{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:11px 0;border-top:1px solid var(--border-soft)}.entry:first-of-type{border-top:0}.entry time{color:var(--accent);font:750 10px/1.5 var(--mono)}.contact h2{font-size:clamp(30px,4vw,46px)}.contact p{color:var(--muted)}.contact-grid{display:grid;gap:7px;margin-top:17px}.contact-row{display:grid;grid-template-columns:78px 1fr auto;gap:10px;align-items:center;border:1px solid var(--border-soft);background:var(--surface);padding:9px;font:700 12px/1 var(--mono)}.copy{border:1px solid var(--border);background:var(--paper);color:var(--accent);padding:6px 8px;cursor:pointer;font:800 10px/1 var(--mono)}.back-top{position:fixed;right:22px;bottom:22px;z-index:20;width:44px;height:44px;border:1px solid var(--border);background:var(--paper);color:var(--accent);box-shadow:var(--shadow);display:grid;place-items:center;font:900 18px/1 var(--mono);opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .16s ease,transform .16s ease,border-color .16s ease}.back-top.visible{opacity:1;pointer-events:auto;transform:translateY(0)}.back-top:hover{border-color:var(--accent);background:var(--accent-soft)}footer{padding:28px 0 44px;color:var(--subtle);font:700 11px/1.5 var(--mono)}.footline{display:flex;flex-wrap:wrap;gap:10px 18px;border-top:1px solid var(--border-soft);padding-top:15px}
+    @media(max-width:980px){.hero,.work,.notes-contact{grid-template-columns:1fr}.lifecycle{min-height:auto}.lane{grid-template-columns:1fr}.arrow{justify-self:center;transform:rotate(90deg)}.lane.bottom .arrow{transform:rotate(-90deg)}.cycle-turn{justify-content:flex-start}.landscape{grid-template-columns:1fr 1fr}.land,.land:nth-child(n){grid-column:span 1}}
+    @media(max-width:680px){.wrap{width:min(100% - 22px,1180px)}.topbar{position:static}nav{display:none}.hero{padding-top:18px}.intro,.lifecycle,.copy-block,.timeline,.main-case,.journal,.contact{padding:16px}h1{font-size:clamp(46px,17vw,68px)}.actions{display:grid}.button{justify-content:flex-start}.section-head,.job,.entry,.contact-row{grid-template-columns:1fr;gap:7px}.case-grid,.landscape{grid-template-columns:1fr}.case:nth-child(n){margin:0}.copy{width:fit-content}.back-top{right:14px;bottom:14px;width:42px;height:42px}}
   </style>
 </head>
 <body>
@@ -190,11 +30,11 @@
       <section class="hero">
         <div class="panel intro"><p class="eyebrow">Kubernetes / platforms / production systems</p><h1>Pavel Klyuev</h1><span class="role">Principal SRE / Platform Engineer</span><p class="lead">Principal SRE / Platform Engineer with 10+ years of experience in Kubernetes, cloud infrastructure, CI/CD, observability and databases.</p><p class="focus">Kubernetes · Terraform · GitOps · CI/CD · Observability · Databases</p><div class="actions"><a class="button primary" href="#experience">Experience</a><a class="button" href="#work">Selected work</a><a class="button" href="#contact">Contact</a></div></div>
         <aside class="panel lifecycle" aria-label="Production lifecycle overview">
-          <div class="cycle-head"><div><h2>Production lifecycle</h2><p>how infrastructure work usually moves through my hands</p></div><div class="status">remote<br>production</div></div>
+          <div class="cycle-head"><div><h2>Production lifecycle</h2><p>How infrastructure work moves through my hands — from planning to production feedback</p></div><div class="status">remote infrastructure<br>production engineering</div></div>
           <div class="cycle-body">
-            <div class="lane top"><article class="stage plan"><b>Plan</b><p>Clarify ownership, constraints, blast radius and rollback path.</p></article><span class="arrow">→</span><article class="stage build"><b>Build</b><p>Terraform, Helm, CI/CD, secrets, charts and automation.</p></article><span class="arrow">→</span><article class="stage deploy"><b>Deploy</b><p>GitOps rollout, probes, config, migration steps and validation.</p></article></div>
-            <div class="cycle-turn">production feedback</div>
-            <div class="lane bottom"><article class="stage improve"><b>Improve</b><p>Remove manual steps, document runbooks and reduce repeat work.</p></article><span class="arrow">←</span><article class="stage observe"><b>Observe</b><p>Metrics, logs, alerts, dashboards and incident context.</p></article><span class="arrow">←</span><article class="stage run"><b>Run</b><p>Operate clusters, databases, traffic and production services.</p></article></div>
+            <div class="lane top"><article class="stage plan"><b>Plan</b><p>Define ownership, requirements, constraints, blast radius, success criteria and rollback strategy.</p></article><span class="arrow">→</span><article class="stage build"><b>Build</b><p>Implement infrastructure, Helm charts, CI/CD pipelines, secrets management and automation.</p></article><span class="arrow">→</span><article class="stage deploy"><b>Deploy</b><p>Roll out changes through GitOps, handle configuration and migrations, verify health and validate the result.</p></article></div>
+            <div class="cycle-turn">feedback loop</div>
+            <div class="lane bottom"><article class="stage improve"><b>Improve</b><p>Eliminate manual work, fix recurring failure modes, document runbooks and feed production lessons back into planning.</p></article><span class="arrow">←</span><article class="stage observe"><b>Observe</b><p>Use metrics, logs, alerts, dashboards and incident context to understand system behaviour.</p></article><span class="arrow">←</span><article class="stage run"><b>Run</b><p>Operate clusters, databases, traffic and production workloads.</p></article></div>
           </div>
         </aside>
       </section>
@@ -208,28 +48,7 @@
   </div>
   <a class="back-top" href="#top" aria-label="Back to top">↑</a>
   <script>
-    const links = [...document.querySelectorAll('nav a')];
-    const sections = links.map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
-    const observer = new IntersectionObserver(entries => entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${e.target.id}`));
-    }), { rootMargin: '-40% 0px -55% 0px' });
-    sections.forEach(s => observer.observe(s));
-    document.querySelectorAll('[data-copy]').forEach(button => button.addEventListener('click', async () => {
-      const value = button.dataset.copy;
-      try {
-        await navigator.clipboard.writeText(value);
-        const previous = button.textContent;
-        button.textContent = 'copied';
-        setTimeout(() => button.textContent = previous, 1200);
-      } catch (_) {
-        window.prompt('Copy value', value);
-      }
-    }));
-    const backTop = document.querySelector('.back-top');
-    const toggleBackTop = () => backTop.classList.toggle('visible', window.scrollY > 360);
-    window.addEventListener('scroll', toggleBackTop, { passive: true });
-    toggleBackTop();
+    const links=[...document.querySelectorAll('nav a')];const sections=links.map(l=>document.querySelector(l.getAttribute('href'))).filter(Boolean);const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(!e.isIntersecting)return;links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')===`#${e.target.id}`))}),{rootMargin:'-40% 0px -55% 0px'});sections.forEach(s=>observer.observe(s));document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{const value=button.dataset.copy;try{await navigator.clipboard.writeText(value);const previous=button.textContent;button.textContent='copied';setTimeout(()=>button.textContent=previous,1200)}catch(_){window.prompt('Copy value',value)}}));const backTop=document.querySelector('.back-top');const toggleBackTop=()=>backTop.classList.toggle('visible',window.scrollY>360);window.addEventListener('scroll',toggleBackTop,{passive:true});toggleBackTop();
   </script>
 </body>
 </html>

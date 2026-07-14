@@ -129,7 +129,11 @@ def fetch_latest() -> dict:
 def main() -> None:
     try:
         payload = fetch_latest()
-    except Exception as exc:  # Keep the site usable even when Telegram blocks preview scraping.
+    except Exception as exc:
+        # Keep the previous successful snapshot and avoid an hourly commit loop.
+        if OUTPUT.exists():
+            print(f"Telegram sync failed; keeping existing snapshot: {type(exc).__name__}: {exc}")
+            return
         payload = {
             "channel": CHANNEL,
             "post": None,

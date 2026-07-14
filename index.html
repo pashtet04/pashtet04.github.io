@@ -83,15 +83,21 @@
     .map-head h2 { margin: 0; font: 800 13px/1.2 var(--mono); color: var(--strong); }
     .map-head p { margin: 5px 0 0; color: var(--muted); font: 600 11px/1.4 var(--mono); }
     .status { border: 1px solid var(--border); background: var(--paper); padding: 9px; font: 700 10px/1.5 var(--mono); color: var(--green); }
-    .map-flow { height: 430px; margin-top: 20px; }
+    .map-flow { height: 395px; margin-top: 20px; }
     .node { position: absolute; width: min(190px, 38vw); border: 1px solid var(--border); background: var(--paper); padding: 12px; box-shadow: 0 8px 20px rgba(15,23,42,.06); }
     .node b { display: block; color: var(--strong); font: 800 12px/1.2 var(--mono); }
     .node p { margin: 7px 0 0; color: var(--muted); font-size: 12px; }
     .n1 { left: 1%; top: 25%; } .n2 { left: 34%; top: 6%; } .n3 { right: 1%; top: 26%; } .n4 { left: 16%; bottom: 5%; } .n5 { right: 9%; bottom: 3%; }
-    .wire { position: absolute; height: 2px; background: var(--accent); opacity: .35; transform-origin: left center; }
-    .w1 { left: 17%; top: 36%; width: 28%; transform: rotate(-12deg); } .w2 { left: 47%; top: 28%; width: 26%; transform: rotate(15deg); } .w3 { left: 65%; top: 48%; width: 22%; transform: rotate(23deg); } .w4 { left: 30%; top: 66%; width: 39%; transform: rotate(5deg); }
-    .wire-label { position: absolute; z-index: 2; padding: 4px 6px; border: 1px solid var(--border-soft); background: rgba(255,255,255,.86); color: var(--accent); font: 800 10px/1 var(--mono); letter-spacing: .04em; }
-    .l1 { left: 29%; top: 28%; } .l2 { left: 58%; top: 31%; } .l3 { left: 73%; top: 55%; } .l4 { left: 47%; top: 70%; }
+    .wire { position: absolute; height: 2px; background: var(--accent); opacity: .38; transform-origin: left center; }
+    .w1 { left: 17%; top: 37%; width: 28%; transform: rotate(-12deg); }
+    .w2 { left: 47%; top: 29%; width: 26%; transform: rotate(15deg); }
+    .w3 { left: 65%; top: 49%; width: 22%; transform: rotate(23deg); }
+    .w4 { left: 30%; top: 68%; width: 39%; transform: rotate(5deg); }
+    .flow-note { position: absolute; color: var(--accent); font: 800 9px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; opacity: .74; pointer-events: none; }
+    .f1 { left: 27%; top: 32%; }
+    .f2 { left: 61%; top: 27%; }
+    .f3 { left: 77%; top: 59%; }
+    .f4 { left: 49%; top: 64%; }
 
     .section { padding: 24px 0; }
     .section-head { display: grid; grid-template-columns: 200px 1fr; gap: 24px; margin-bottom: 14px; }
@@ -155,7 +161,7 @@
       .map { min-height: auto; }
       .map-flow { height: auto; display: grid; gap: 9px; margin: 18px 0 0; }
       .node { position: static; width: auto; }
-      .wire, .wire-label { display: none; }
+      .wire, .flow-note { display: none; }
       .landscape { grid-template-columns: 1fr 1fr; }
       .land, .land:nth-child(n) { grid-column: span 1; }
     }
@@ -204,7 +210,7 @@
           <div class="map-head"><div><h2>Production map</h2><p>responsibility areas, not another stack list</p></div><div class="status">remote<br>production</div></div>
           <div class="map-flow">
             <span class="wire w1"></span><span class="wire w2"></span><span class="wire w3"></span><span class="wire w4"></span>
-            <span class="wire-label l1">route</span><span class="wire-label l2">deploy</span><span class="wire-label l3">observe</span><span class="wire-label l4">backup</span>
+            <span class="flow-note f1">route</span><span class="flow-note f2">deploy</span><span class="flow-note f3">observe</span><span class="flow-note f4">backup</span>
             <div class="node n1"><b>Traffic</b><p>Ingress, DNS, load balancing, TLS and routing boundaries.</p></div>
             <div class="node n2"><b>Compute</b><p>Managed and self-hosted Kubernetes clusters.</p></div>
             <div class="node n3"><b>Workloads</b><p>Deployments, jobs, charts, rollout behavior and runtime configuration.</p></div>
@@ -253,7 +259,7 @@
 
     <footer><div class="footline"><span>klyuev.icu</span><span>static profile page</span><span>no trackers</span></div></footer>
   </div>
-  <a class="back-top" href="#top" aria-label="Back to top">↑</a>
+  <a href="#top" class="back-top" aria-label="Back to top">↑</a>
 
   <script>
     const links = [...document.querySelectorAll('nav a')];
@@ -276,7 +282,7 @@
 
     const backTop = document.querySelector('.back-top');
     window.addEventListener('scroll', () => {
-      backTop?.classList.toggle('visible', window.scrollY > 480);
+      backTop?.classList.toggle('visible', window.scrollY > 520);
     }, { passive: true });
   </script>
 </body>

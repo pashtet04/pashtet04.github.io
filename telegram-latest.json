@@ -1,14 +1,14 @@
 {
   "channel": "kubertat",
-  "post": null,
-  "url": "https://t.me/kubertat",
-  "text": "Open the Telegram channel to read the latest post.",
-  "published_at": null,
-  "views": null,
-  "comments": null,
-  "reactions": null,
-  "forwards": null,
+  "post": "kubertat/481",
+  "url": "https://t.me/kubertat/481",
+  "text": "Еще один пример XY Problem\n\nВ аппку летит кривой реквест (не тот хост, заголовок или еще что-то — неважно).\n\nИ вместо того чтобы задаться вопросом \nпочему\nначинается \nа давайте перепишем код, чтобы он переписывал реквест на правильный\n\nИ это барахло вроде даже работает.\n\nНо проблема никуда не делась. Потом это всплывёт в самом тупорылом месте: на втором домене, в другом окружении, за CDN, после смены балансира, при переезде в другой ingress/controller/платформу.\n\nНе говоря уже о том что часто такое решение сопровождается кривым нечитаемым и неинтуитивным кодом. Не надо так делать — пытайтесь лечить причины, а не симптомы",
+  "published_at": "2026-07-08T08:25:37+00:00",
+  "views": 179,
+  "comments": 0,
+  "reactions": 10,
+  "forwards": 1,
   "image": null,
-  "error": "ConnectionError: HTTPSConnectionPool(host='t.me', port=443): Max retries exceeded with url: /s/kubertat (Caused by NameResolutionError(\"HTTPSConnection(host='t.me', port=443): Failed to resolve 't.me' ([Errno -2] Name or service not known)\"))",
-  "updated_at": "2026-07-14T11:19:40.609989+00:00"
+  "error": null,
+  "updated_at": "2026-07-14T11:52:48.368185+00:00"
 }

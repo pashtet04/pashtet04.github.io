@@ -4,11 +4,11 @@
   "url": "https://t.me/kubertat/482",
   "text": "💡 А вы знали, что Trivy Operator может автоматически искать уязвимости в ваших workloads, сканируя используемые образы и предоставляя отчеты с CVE прямо в кластере.\n\nДашборда правда не нашлось, пришлось сгенерить по шустрому —  https://github.com/pashtet04/grafana-dashboards/blob/main/trivy-operator.json\n\nЗа короткое время были обновлены большая часть инфраструктурных сервисов\nCRITICAL ⬇️26% HIGH ⬇️20%",
   "published_at": "2026-08-10T06:26:30+00:00",
-  "views": 992,
+  "views": 993,
   "comments": 9,
   "reactions": 29,
   "forwards": 49,
   "image": "telegram-latest.jpg",
   "error": null,
-  "updated_at": "2026-08-15T20:39:38.722936+00:00"
+  "updated_at": "2026-08-15T22:38:44.055129+00:00"
 }

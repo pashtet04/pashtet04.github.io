@@ -1,0 +1,29 @@
+name: Patch homepage positioning
+
+on:
+  push:
+    paths:
+      - "scripts/patch_hiring_value.py"
+      - ".github/workflows/patch-homepage-positioning.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/patch_hiring_value.py
+      - name: Commit homepage update
+        run: |
+          rm scripts/patch_hiring_value.py
+          rm .github/workflows/patch-homepage-positioning.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Make homepage value proposition clearer"
+          git push

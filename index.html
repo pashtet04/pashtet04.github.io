@@ -42,6 +42,9 @@
     .hire{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:34px;align-items:end;margin:26px 0 6px;padding:26px}.hire .eyebrow{margin-bottom:15px}.hire h2{margin:0;color:var(--strong);font-size:clamp(30px,4vw,48px);line-height:.98;letter-spacing:-.05em}.hire>div>p:not(.eyebrow){margin:15px 0 0;color:var(--muted);max-width:68ch}.hire-side{display:flex;flex-direction:column;align-items:flex-start}.hire-side p{font:600 11px/1.6 var(--mono)!important}.hire-side .button{margin-top:18px}
     @media(max-width:980px){.outcome-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.hire{grid-template-columns:1fr}}
     @media(max-width:680px){.outcome-strip{grid-template-columns:1fr}.hire{padding:16px}.lead{font-size:22px}}
+
+    /* Mobile: decorative PK / SRE label is hidden to avoid overlapping the hero eyebrow. */
+    @media(max-width:680px){.intro::after{display:none}}
 </style>
 </head>
 <body>

@@ -1,0 +1,29 @@
+name: Simplify homepage copy
+
+on:
+  push:
+    paths:
+      - ".github/workflows/one-time-simplify-copy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/one_time_simplify_copy.py
+      - name: Commit homepage update and remove one-time files
+        run: |
+          rm scripts/one_time_simplify_copy.py
+          rm .github/workflows/one-time-simplify-copy.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Simplify homepage copy"
+          git push

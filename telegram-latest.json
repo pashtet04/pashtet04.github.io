@@ -1,14 +1,14 @@
 {
   "channel": "kubertat",
-  "post": "kubertat/487",
-  "url": "https://t.me/kubertat/487",
-  "text": "",
-  "published_at": "2026-08-17T09:26:23+00:00",
-  "views": 260,
-  "comments": null,
-  "reactions": null,
-  "forwards": 8,
-  "image": "telegram-latest.jpg",
+  "post": "kubertat/488",
+  "url": "https://t.me/kubertat/488",
+  "text": "Ваши разрабы не хотят разгребать легаси и рефакторить кронтаски в отдельный scheduler с очередью?\nУ вас есть сотни кронтасок в проде, которые вы хотите таки контролировать в контейнерах?\nУ вас айсикью выше 70, раз вы все еще не описали каждую строку crontab в отдельном Kubernetes ресурсе (Job/Cronjob)?\n\nтут уже говорили про недостатки крона\nSupercronic пытается решить некоторые из них: кронтаски наследуют переменные окружения, выводит логи в stderr, логирует запуски результат выполнения и ошибки, посылает SIGTERM/SIGINT и что-то там еще.\n\nSupercronic is a crontab-compatible job runner, designed specifically to run in containers.\n\nLegacy не убить!",
+  "published_at": "2026-09-15T09:59:36+00:00",
+  "views": 443,
+  "comments": 1,
+  "reactions": 8,
+  "forwards": 6,
+  "image": null,
   "error": null,
-  "updated_at": "2026-09-15T07:46:11.095704+00:00"
+  "updated_at": "2026-09-15T13:34:43.163461+00:00"
 }

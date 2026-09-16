@@ -1,14 +1,14 @@
 {
   "channel": "kubertat",
-  "post": "kubertat/488",
-  "url": "https://t.me/kubertat/488",
-  "text": "Ваши разрабы не хотят разгребать легаси и рефакторить кронтаски в отдельный scheduler с очередью?\nУ вас есть сотни кронтасок в проде, которые вы хотите таки контролировать в контейнерах?\nУ вас айсикью выше 70, раз вы все еще не описали каждую строку crontab в отдельном Kubernetes ресурсе (Job/Cronjob)?\n\nтут уже говорили про недостатки крона\nSupercronic пытается решить некоторые из них: кронтаски наследуют переменные окружения, выводит логи в stderr, логирует запуски результат выполнения и ошибки, посылает SIGTERM/SIGINT и что-то там еще.\n\nSupercronic is a crontab-compatible job runner, designed specifically to run in containers.\n\nLegacy не убить!",
-  "published_at": "2026-09-15T09:59:36+00:00",
-  "views": 673,
+  "post": "kubertat/489",
+  "url": "https://t.me/kubertat/489",
+  "text": "When I was an SRE at LinkedIn, back in 2012, I designed a system that could heal itself and learn from previous incidents. AI capabilities were nowhere near what we have today, and that remained a prototype, but this is now a reality.\n\nThese tools do it all: inspect alerts, form hypotheses, query telemetry, correlate recent deployments, and even implement the fix themselves. As much as I love to see it, I have a major concern: we are losing touch with our systems.\n\n\"We are losing touch with our systems\"",
+  "published_at": "2026-09-16T07:12:41+00:00",
+  "views": 126,
   "comments": 1,
-  "reactions": 9,
-  "forwards": 10,
+  "reactions": 8,
+  "forwards": 3,
   "image": null,
   "error": null,
-  "updated_at": "2026-09-16T06:03:29.725026+00:00"
+  "updated_at": "2026-09-16T11:36:56.612836+00:00"
 }

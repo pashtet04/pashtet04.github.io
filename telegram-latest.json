@@ -4,11 +4,11 @@
   "url": "https://t.me/kubertat/489",
   "text": "When I was an SRE at LinkedIn, back in 2012, I designed a system that could heal itself and learn from previous incidents. AI capabilities were nowhere near what we have today, and that remained a prototype, but this is now a reality.\n\nThese tools do it all: inspect alerts, form hypotheses, query telemetry, correlate recent deployments, and even implement the fix themselves. As much as I love to see it, I have a major concern: we are losing touch with our systems.\n\n\"We are losing touch with our systems\"",
   "published_at": "2026-09-16T07:12:41+00:00",
-  "views": 180,
+  "views": 181,
   "comments": 2,
   "reactions": 10,
   "forwards": 3,
   "image": null,
   "error": null,
-  "updated_at": "2026-09-18T16:25:23.652754+00:00"
+  "updated_at": "2026-09-18T19:37:37.304705+00:00"
 }

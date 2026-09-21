@@ -1,14 +1,14 @@
 {
   "channel": "kubertat",
-  "post": "kubertat/489",
-  "url": "https://t.me/kubertat/489",
-  "text": "When I was an SRE at LinkedIn, back in 2012, I designed a system that could heal itself and learn from previous incidents. AI capabilities were nowhere near what we have today, and that remained a prototype, but this is now a reality.\n\nThese tools do it all: inspect alerts, form hypotheses, query telemetry, correlate recent deployments, and even implement the fix themselves. As much as I love to see it, I have a major concern: we are losing touch with our systems.\n\n\"We are losing touch with our systems\"",
-  "published_at": "2026-09-16T07:12:41+00:00",
-  "views": 196,
-  "comments": 2,
-  "reactions": 10,
+  "post": "kubertat/490",
+  "url": "https://t.me/kubertat/490",
+  "text": "Helm mapkubeapis Plugin\n\nmapkubeapis is a Helm v3 plugin which updates in-place Helm release metadata that contains deprecated or removed Kubernetes APIs to a new \ninstance with supported Kubernetes APIs\n\nОказывается нельзя просто так через helm upgrade обновить apiVersion resources если старая версия API больше не доступна в кластере. Вот плагин который заменит старый API в сохранённом манифесте и создаст новую ревизию Helm-релиза.\n\nhttps://helm.sh/docs/topics/kubernetes_apis/",
+  "published_at": "2026-09-21T04:57:48+00:00",
+  "views": 66,
+  "comments": 0,
+  "reactions": 7,
   "forwards": 3,
-  "image": null,
+  "image": "telegram-latest.jpg",
   "error": null,
-  "updated_at": "2026-09-20T22:27:30.442962+00:00"
+  "updated_at": "2026-09-21T06:23:02.521454+00:00"
 }

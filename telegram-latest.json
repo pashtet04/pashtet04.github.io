@@ -4,11 +4,11 @@
   "url": "https://t.me/kubertat/490",
   "text": "Helm mapkubeapis Plugin\n\nmapkubeapis is a Helm v3 plugin which updates in-place Helm release metadata that contains deprecated or removed Kubernetes APIs to a new \ninstance with supported Kubernetes APIs\n\nОказывается нельзя просто так через helm upgrade обновить apiVersion resources если старая версия API больше не доступна в кластере. Вот плагин который заменит старый API в сохранённом манифесте и создаст новую ревизию Helm-релиза.\n\nhttps://helm.sh/docs/topics/kubernetes_apis/",
   "published_at": "2026-09-21T04:57:48+00:00",
-  "views": 148,
+  "views": 158,
   "comments": 0,
   "reactions": 7,
   "forwards": 6,
   "image": "telegram-latest.jpg",
   "error": null,
-  "updated_at": "2026-09-21T23:18:02.652282+00:00"
+  "updated_at": "2026-09-22T09:58:50.384700+00:00"
 }

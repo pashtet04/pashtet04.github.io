@@ -1,14 +1,14 @@
 {
   "channel": "kubertat",
-  "post": "kubertat/491",
-  "url": "https://t.me/kubertat/491",
-  "text": "Deckhouse — это корпоративные слезы\n\nThe community releases new Kubernetes minor versions (such as 1.37) on average once every four months\n\nчем они там занимаются? верфью ненужной? еще какие-то тулинги/велосипеды ненужные?\nобновитесь плиз — год прошел \n\nKubernetes 1.33 was officially released on April 23, 2025\n\nИ я искренне недоумеваю: там же сидит стадо сотрудников на контрактах с крупными фирмами, нету одного-двух кто бы сопровождал релизный цикл фундаментального софта опенсорсного который они продают? И пока писал додумал про ответ, они наверняка форкнули Kubernetes и сделали его лучше ценой стабильных релизов.\n\nКапитализм в действии: все друг другу продают презентации за которыми ничего нет.",
-  "published_at": "2026-10-23T07:08:15+00:00",
-  "views": 271,
-  "comments": 6,
-  "reactions": 20,
-  "forwards": 7,
+  "post": "kubertat/492",
+  "url": "https://t.me/kubertat/492",
+  "text": "We’re excited to introduce opensource vmestimator, a new component in the VictoriaMetrics ecosystem.\n\nvmestimator measures metrics cardinality across arbitrary label dimensions and exposes the results as Prometheus-compatible metrics. It helps to understand where cardinality comes from, track how it evolves over time, and build early-warning alerts before cardinality becomes a problem.\n\nIf you’re operating Prometheus-compatible monitoring systems and want realtime visibility into metric cardinality, give vmestimator a try. We’d love to hear your feedback and learn more about your use cases.\n\nRead more about its design and configuration in the documentation, or explore it yourself in the playground.",
+  "published_at": "2026-10-27T14:56:44+00:00",
+  "views": 105,
+  "comments": 0,
+  "reactions": 3,
+  "forwards": 2,
   "image": "telegram-latest.jpg",
   "error": null,
-  "updated_at": "2026-10-27T10:36:31.095652+00:00"
+  "updated_at": "2026-10-27T16:41:33.981747+00:00"
 }

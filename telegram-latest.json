@@ -4,11 +4,11 @@
   "url": "https://t.me/kubertat/492",
   "text": "We’re excited to introduce opensource vmestimator, a new component in the VictoriaMetrics ecosystem.\n\nvmestimator measures metrics cardinality across arbitrary label dimensions and exposes the results as Prometheus-compatible metrics. It helps to understand where cardinality comes from, track how it evolves over time, and build early-warning alerts before cardinality becomes a problem.\n\nIf you’re operating Prometheus-compatible monitoring systems and want realtime visibility into metric cardinality, give vmestimator a try. We’d love to hear your feedback and learn more about your use cases.\n\nRead more about its design and configuration in the documentation, or explore it yourself in the playground.",
   "published_at": "2026-10-27T14:56:44+00:00",
-  "views": 157,
+  "views": 161,
   "comments": 0,
   "reactions": 3,
   "forwards": 3,
   "image": "telegram-latest.jpg",
   "error": null,
-  "updated_at": "2026-10-30T07:08:32.508081+00:00"
+  "updated_at": "2026-10-30T14:10:57.557992+00:00"
 }
